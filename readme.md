@@ -1,3 +1,10 @@
+# Lumen 5.3 Api
+    1. Clone source code
+    2. Create file .env
+    3. composer install
+    4. php artisan migrate:refresh --seed
+
+
 # Lumen PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
