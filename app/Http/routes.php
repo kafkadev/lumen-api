@@ -14,3 +14,11 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->group(['prefix' => 'api', 'namespace' => 'App\Http\Controllers\Api'], function () use ($app) {
+    $app->get('users', 'UsersController@index');
+    $app->get('user/{user}', 'UsersController@show');
+    $app->post('user', 'UsersController@store');
+    $app->patch('user/{user}', 'UsersController@update');
+    $app->delete('user/{user}', 'UsersController@destroy');
+});
