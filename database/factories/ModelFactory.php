@@ -11,9 +11,14 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+    $hasher = app()->make('hash');
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'username' => $faker->userName,
+        'password' => $hasher->make('secret'),
+        'remember_token' => str_random(10),
+        'api_token' => str_random(10),
     ];
 });
