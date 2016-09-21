@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@lumen-api.app',
             'password' => $hasher->make('admin'),
+            'role' => 1,
         ]);
         factory(App\Models\User::class, 50)->create()->make();
     }

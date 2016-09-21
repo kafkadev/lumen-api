@@ -29,4 +29,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password', 'api_token'
     ];
+
+    const IS_ADMIN = 1;
+
+    public function isAdmin()
+    {
+        return $this->role == self::IS_ADMIN;
+    }
 }
