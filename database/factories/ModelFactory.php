@@ -22,3 +22,24 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'api_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'slug' => $faker->slug,
+        'description' => $faker->sentences(4, true),
+    ];
+});
+
+$factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
+    return [
+        'category_id' => \App\Models\Category::orderByRaw('RAND()')->first()->id,
+        'user_id' => \App\Models\User::orderByRaw('RAND()')->first()->id,
+        'slug' => $faker->slug,
+        'title' => $faker->jobTitle,
+        'excerpt' => $faker->sentences(25, true),
+        'content' => $faker->realText(500),
+        'status' => rand(0, 1),
+        'image' => $faker->imageUrl()   ,
+    ];
+});
