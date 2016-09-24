@@ -7,6 +7,7 @@
         </div>
 
         <div class="col-md-12">
+            <p><a href="{{ url('admin/category/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New</a></p>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>

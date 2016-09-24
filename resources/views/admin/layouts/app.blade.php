@@ -31,6 +31,7 @@
         <div id="page-wrapper">
             @yield('content')
         </div>
+        @include('admin.layouts.footer')
         <!-- /#page-wrapper -->
 
     </div>

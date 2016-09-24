@@ -316,3 +316,9 @@ table.dataTable thead .sorting:after {
 .page-header {
     margin: 20px 0 20px;
 }
+.site-footer {
+    margin-top: 20px;
+    background: #f8f8f8;
+    color: black;
+    padding: 5px 0;
+}
