@@ -39,7 +39,7 @@ class Authenticate
         if ($this->auth->guard($guard)->guest()) {
 
             if (!isset($_SESSION["logged_id"])) {
-                return view('auth.login');
+                return redirect('login');
             }
 
         }

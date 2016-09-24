@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\User;
 
 class AdminMiddleware
 {
@@ -15,11 +16,12 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->isAdmin()) {
-            return response()->json([
-                'message' => 'You do not have permission.',
-            ]);
+        $authUser = User::find($_SESSION['logged_id']);
+
+        if ( !$authUser->isAdmin() ) {
+            return redirect('/');
         }
+
         return $next($request);
     }
 }

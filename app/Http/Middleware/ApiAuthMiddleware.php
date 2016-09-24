@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use App\Models\User;
 
-class Authenticate
+class ApiAuthMiddleware
 {
     /**
      * The authentication guard factory instance.
