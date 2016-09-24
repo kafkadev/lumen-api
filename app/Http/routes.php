@@ -24,9 +24,10 @@ $app->group(['prefix' => 'api', 'namespace' => 'App\Http\Controllers\Api'], func
 
 $app->group(['namespace' => 'App\Http\Controllers\Auth'], function () use ($app) {
     $app->get('login', 'AuthController@showLogin');
-    $app->post('login', 'AuthController@login');
-    $app->get('register', 'AuthController@showresgister');
-    $app->post('register', 'AuthController@register');
+    $app->post('login', 'AuthController@postLogin');
+    $app->get('register', 'AuthController@showRegister');
+    $app->post('register', 'AuthController@postRegister');
+    $app->get('logout', 'AuthController@logout');
 });
 
 $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function () use ($app) {

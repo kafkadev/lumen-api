@@ -41,7 +41,6 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Logged in!',
             'api_token' => $api_token,
-            'authUser' => \Auth::user(),
         ]);
     }
 

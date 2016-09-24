@@ -9,11 +9,44 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     /**
+     * @return \Illuminate\View\View
+     */
+    public function showLogin()
+    {
+        if (isset($_SESSION["logged_id"])) {
+            return redirect('admin');
+        }
+        return view('auth.login');
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
+    public function logout()
+    {
+        if (isset($_SESSION["logged_id"])) {
+            session_unset($_SESSION["logged_id"]);
+        }
+        return redirect('login');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function showRegister()
+    {
+        if (isset($_SESSION["logged_id"])) {
+            return redirect('admin');
+        }
+        return view('auth.register');
+    }
+
+    /**
      * Index login controller
      *
      * When user success login will retrive callback as api_token
      */
-    public function login(Request $request)
+    public function postLogin(Request $request)
     {
         $hasher = app()->make('hash');
 
@@ -23,26 +56,17 @@ class AuthController extends Controller
         $user = User::where('username', $username)->first();
 
         if (!$user) {
-            return response()->json([
-                'message' => 'Your username or password incorrect!'
-            ]);
+            $_SESSION['errors']['fail'] = 'Wrong Username or Password!';
+            return redirect('login');
         }
 
         if ( !$hasher->check($password, $user->password) ) {
-            return response()->json([
-                'message' => 'Your username or password incorrect!'
-            ]);
+            $_SESSION['errors']['fail'] = 'Wrong Username or Password!';
+            return redirect('login');
         }
 
-        $api_token = sha1(time());
-        $create_token = User::where('id', $user->id)->update(['api_token' => $api_token]);
-
-        return response([
-            'success' => true,
-            'message' => 'Logged in!',
-            'api_token' => $api_token,
-            'authUser' => \Auth::user(),
-        ]);
+        $_SESSION['logged_id'] = $user->id;
+        return redirect('admin');
     }
 
     /**
@@ -50,33 +74,49 @@ class AuthController extends Controller
      *
      * @param $request Request
      */
-    public function register(Request $request)
+    public function postRegister(Request $request)
     {
         $hasher = app()->make('hash');
-
         $request->merge(array_map('trim', $request->except(['password', 'password_confirmation'])));
-        $this->validate($request, [
-            'name' => 'required|unique:users',
-            'username' => 'required|alpha_dash|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
+
+        $username = $request->get('username');
+        $password = $request->get('password');
+        $name = $request->get('name');
+
+        if ($name == '') {
+            $_SESSION['errors']['name'] = 'Name is required!';
+            return redirect('register');
+        }
+
+        if ($username == '') {
+            $_SESSION['errors']['username'] = 'Username is required!';
+            return redirect('register');
+        }
+
+        if ( User::where('username', $username)
+                 ->count() > 0 ) {
+            $_SESSION['errors']['username_exist'] = 'Username existed!';
+            return redirect('register');
+        }
+
+        if ($password == '') {
+            $_SESSION['errors']['password'] = 'Password is required!';
+            return redirect('register');
+        }
+
+        if ($password != $request->get('password_confirmation')) {
+            $_SESSION['errors']['password_confirmation'] = 'Password does not match';
+            return redirect('register');
+        }
+
+        $user = User::create([
+            'name' => $request->get('name'),
+            'username' => $username,
+            'email' => $email,
+            'password' => $hasher->make($password),
+            'role' => 0,
         ]);
 
-        $data = $request->all();
-        $data['password'] = $hasher->make($request->get('password'));
-
-        $register = User::create($data);
-
-        if ($register) {
-            return response([
-                'success' => true,
-                'message' => 'Success register!',
-            ]);
-        }else{
-            return response([
-                'success' => false,
-                'message' => 'Failed to register!',
-            ]);
-        }
+        return $this->postLogin($request);
     }
 }
