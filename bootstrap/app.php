@@ -64,6 +64,7 @@ $app->middleware([
 ]);
 
 $app->routeMiddleware([
+    'api-auth' => App\Http\Middleware\ApiAuthMiddleware::class,
     'auth' => App\Http\Middleware\Authenticate::class,
     'admin' => App\Http\Middleware\AdminMiddleware::class,
 ]);

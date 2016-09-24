@@ -38,10 +38,19 @@ class Authenticate
     {
         if ($this->auth->guard($guard)->guest()) {
 
-            if (!isset($_SESSION["logged_id"])) {
-                return view('auth.login');
+            if (!$request->has('api_token')) {
+                return response()->json([
+                    'message' => 'Login please!',
+                ]);
             }
 
+            $token = $request->get('api_token');
+            $checkToken = User::where('api_token', $token)->first();
+            if (!$checkToken) {
+                return response()->json([
+                    'message' => 'Login please!',
+                ]);
+            }
         }
         return $next($request);
     }
