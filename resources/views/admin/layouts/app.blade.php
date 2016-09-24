@@ -18,7 +18,9 @@
 
     <!-- SB Admin CSS - Include with every page -->
     <link href="{{ asset('admin/css/sb-admin.css') }}" rel="stylesheet">
-
+    <script type="text/javascript">
+        var ADMIN_URL = '{{ url('admin') }}';
+    </script>
 </head>
 
 <body>
@@ -39,16 +41,10 @@
     <script type="text/javascript" src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 
-    <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script type="text/javascript" src="{{ asset('admin/js/plugins/morris/raphael-2.1.0.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('admin/js/plugins/morris/morris.js') }}"></script>
-
     <!-- SB Admin Scripts - Include with every page -->
     <script type="text/javascript" src="{{ asset('admin/js/sb-admin.js') }}"></script>
 
-    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
-    <script type="text/javascript" src="{{ asset('admin/js/demo/dashboard-demo.js') }}"></script>
-
+    @yield('footer')
 </body>
 
 </html>

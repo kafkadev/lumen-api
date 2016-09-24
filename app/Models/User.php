@@ -31,9 +31,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     const IS_ADMIN = 1;
+    const IS_USER = 0;
 
     public function isAdmin()
     {
         return $this->role == self::IS_ADMIN;
+    }
+
+    public function getRoleName()
+    {
+        if ($this->role == self::IS_ADMIN) {
+            return 'ADMIN';
+        }
+        return 'USER';
+    }
+
+    protected function getAllRoles()
+    {
+        return [
+            self::IS_USER => 'User',
+            self::IS_ADMIN => 'Admin',
+        ];
     }
 }
