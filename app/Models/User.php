@@ -53,4 +53,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             self::IS_ADMIN => 'Admin',
         ];
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

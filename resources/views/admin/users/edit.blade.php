@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h2 class="page-header">Edit User</h2>
+            <h2 class="page-header">Update User</h2>
         </div>
         @include('errors.error_html')
         @include('success.showing_success')
@@ -43,6 +43,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-info" id="submit-button">Create</button>
+                <button type="reset" class="btn btn-default">Cancel</button>
             {!! Form::close() !!}
         </div>
     </div>

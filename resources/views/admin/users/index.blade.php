@@ -15,6 +15,7 @@
                             <th>Username</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Posts</th>
                             <th>Role</th>
                             <th></th>
                         </tr>
@@ -26,6 +27,7 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td align="right"><a href="{{ url("admin/user/$user->id/posts") }}">{{ $user->posts->count() }}</a></td>
                                 <td>{{ $user->getRoleName() }}</td>
                                 <td align="center">
                                     {!! Form::open(['method' => 'DELETE', 'url' => "admin/user/$user->id"]) !!}

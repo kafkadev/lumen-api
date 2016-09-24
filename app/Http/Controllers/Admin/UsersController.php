@@ -24,7 +24,7 @@ class UsersController extends AdminController
     */
     public function index()
     {
-        $this->viewData['users'] = User::orderBy('created_at', 'desc')->paginate(10);
+        $this->viewData['users'] = User::orderBy('created_at', 'desc')->orderBy('username')->with('posts')->paginate(10);
         return view('admin.users.index', $this->viewData);
     }
 
