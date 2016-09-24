@@ -9,12 +9,19 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = 'admin/dashboard';
+
+    /**
      * @return \Illuminate\View\View
      */
     public function showLogin()
     {
         if (isset($_SESSION["logged_id"])) {
-            return redirect('admin');
+            return redirect($this->redirectTo);
         }
         return view('auth.login');
     }
@@ -36,7 +43,7 @@ class AuthController extends Controller
     public function showRegister()
     {
         if (isset($_SESSION["logged_id"])) {
-            return redirect('admin');
+            return redirect($this->redirectTo);
         }
         return view('auth.register');
     }
@@ -66,7 +73,7 @@ class AuthController extends Controller
         }
 
         $_SESSION['logged_id'] = $user->id;
-        return redirect('admin');
+        return redirect($this->redirectTo);
     }
 
     /**

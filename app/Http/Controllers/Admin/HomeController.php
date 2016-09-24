@@ -21,6 +21,6 @@ class HomeController extends AdminController
 
     public function index()
     {
-        return 'string';
+        return view('admin.dashboard', $this->viewData);
     }
 }

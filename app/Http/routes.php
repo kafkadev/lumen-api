@@ -31,7 +31,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Auth'], function () use ($app)
 });
 
 $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function () use ($app) {
-    $app->get('/', 'HomeController@index');
+    $app->get('dashboard', 'HomeController@index');
     $app->get('profile', 'ProfileController@index');
     $app->patch('profile/info', 'ProfileController@info');
     $app->patch('profile/password', 'ProfileController@password');
