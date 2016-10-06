@@ -43,3 +43,18 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'image' => $faker->imageUrl()   ,
     ];
 });
+
+$factory->define(App\Models\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'slug' => $faker->slug,
+    ];
+});
+
+$factory->define(App\Models\PostTag::class, function (Faker\Generator $faker) {
+    return [
+        'tag_id' => \App\Models\Tag::orderByRaw('RAND()')->first()->id,
+        'post_id' => \App\Models\Post::orderByRaw('RAND()')->first()->id,
+    ];
+});
+

@@ -72,4 +72,6 @@ $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], 
 $app->group(['namespace' => 'App\Http\Controllers\Theme'], function () use ($app) {
     $app->get('/', 'HomeController@index');
     $app->get('profile', 'ProfileController@index');
+
+    $app->get('{post}', 'PostsController@show');
 });

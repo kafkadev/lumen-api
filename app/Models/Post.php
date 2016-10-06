@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model {
+class Post extends Model
+{
     use SoftDeletes;
 
     /**
@@ -33,7 +34,12 @@ class Post extends Model {
 
     public function tags()
     {
-        return $this->belongsToMany(PostTag::class);
+        return $this->belongsToMany(PostTag::class, 'post_tag', 'tag_id', 'post_id');
+    }
+
+    public function posttags()
+    {
+        return $this->hasMany(PostTag::class);
     }
 
     public function user()
