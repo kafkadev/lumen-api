@@ -25,4 +25,14 @@ class HomeController extends ThemeController
         $this->viewData['posts'] = Post::orderBy('created_at')->paginate(10);
         return view('theme.home', $this->viewData);
     }
+
+    public function about()
+    {
+        return view('theme.about', $this->viewData);
+    }
+
+    public function contact()
+    {
+        return view('theme.contact', $this->viewData);
+    }
 }

@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('/') }}">Start Bootstrap</a>
+            <a class="navbar-brand" href="{{ url('/') }}">Tiep Pt</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,10 +19,10 @@
                     <a href="{{ url('/') }}">Home</a>
                 </li>
                 <li>
-                    <a href="{{ url('about') }}">About</a>
+                    <a href="{{ url('blog') }}">Blog</a>
                 </li>
                 <li>
-                    <a href="{{ url('blog') }}">Sample Post</a>
+                    <a href="{{ url('about') }}">About</a>
                 </li>
                 <li>
                     <a href="{{ url('contact') }}">Contact</a>

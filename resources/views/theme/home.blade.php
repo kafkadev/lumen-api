@@ -19,9 +19,9 @@
 
     <!-- Main Content -->
     <div class="container">
-        {{-- <div class="row"> --}}
-            @foreach ($posts as $post)
-                <div class="col-md-6">
+        @foreach ($posts as $post)
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
                     <div class="post-preview">
                         <a href="{{ url("$post->slug") }}">
                             <h2 class="post-title">
@@ -36,8 +36,8 @@
                     </div>
                     <hr>
                 </div>
-            @endforeach
-        {{-- </div> --}}
+            </div>
+        @endforeach
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <!-- Pager -->

@@ -13,12 +13,12 @@ class UsersTableSeeder extends Seeder
     {
         $hasher = app()->make('hash');
         factory(App\Models\User::class)->create([
-            'name' => 'Administrator',
+            'name' => 'Tiep Pt',
             'username' => 'admin',
-            'email' => 'admin@tieppt.app',
+            'email' => 'admin@tieppt.com',
             'password' => $hasher->make('admin'),
             'role' => 1,
         ]);
-        factory(App\Models\User::class, 50)->create()->make();
+        // factory(App\Models\User::class, 50)->create()->make();
     }
 }

@@ -13,6 +13,13 @@
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     $hasher = app()->make('hash');
+
+    $faker->addProvider(new Faker\Provider\vi_VN\Address($faker));
+    $faker->addProvider(new Faker\Provider\vi_VN\Color($faker));
+    $faker->addProvider(new Faker\Provider\vi_VN\Person($faker));
+    $faker->addProvider(new Faker\Provider\vi_VN\PhoneNumber($faker));
+    $faker->addProvider(new Faker\Provider\vi_VN\PhoneNumber($faker));
+
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -27,7 +34,7 @@ $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,
         'slug' => $faker->slug,
-        'description' => $faker->sentences(4, true),
+        'description' => $faker->sentences(1, true),
     ];
 });
 
@@ -37,8 +44,8 @@ $factory->define(App\Models\Post::class, function (Faker\Generator $faker) {
         'user_id' => \App\Models\User::orderByRaw('RAND()')->first()->id,
         'slug' => $faker->slug,
         'title' => $faker->jobTitle,
-        'excerpt' => $faker->sentences(25, true),
-        'content' => $faker->realText(500),
+        'excerpt' => $faker->sentences(2, true),
+        'content' => $faker->realText(3000),
         'status' => rand(0, 1),
         'image' => $faker->imageUrl()   ,
     ];

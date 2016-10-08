@@ -20,6 +20,12 @@ class PostsController extends ThemeController
         parent::__construct();
     }
 
+    public function index()
+    {
+        $this->viewData['posts'] = Post::orderBy('created_at')->paginate(10);
+        return view('theme.home', $this->viewData);
+    }
+
     public function show($slug)
     {
         $this->viewData['post'] = Post::where('slug', $slug)->first();

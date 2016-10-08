@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    <title>Tiep Pt</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('theme/css/bootstrap.min.css') }}" rel="stylesheet">
