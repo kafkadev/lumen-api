@@ -22,6 +22,10 @@
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
+    <script>
+        var BASE_URL = '{{ url('/') }}';
+    </script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +45,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('theme/js/bootstrap.min.js') }}"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('theme/js/clean-blog.min.js') }}"></script>
+    <script src="{{ asset('theme/js/clean-blog.js') }}"></script>
     <script src="{{ asset('theme/js/brick-by-brick.min.js') }}"></script>
 
     @yield('footer')

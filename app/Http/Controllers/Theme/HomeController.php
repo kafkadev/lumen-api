@@ -31,8 +31,13 @@ class HomeController extends ThemeController
         return view('theme.about', $this->viewData);
     }
 
-    public function contact()
+    public function getContact()
     {
         return view('theme.contact', $this->viewData);
+    }
+
+    public function postContact(Request $request)
+    {
+        dd($request->all());
     }
 }

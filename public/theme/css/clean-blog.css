@@ -230,7 +230,7 @@ hr.small {
 }
 .post-preview > .post-meta {
   color: #808080;
-  font-size: 18px;
+  font-size: 17px;
   font-style: italic;
   margin-top: 0;
 }
@@ -428,4 +428,7 @@ body {
   color: white;
   text-shadow: none;
   background: #0085a1;
+}
+#success {
+  font-size: 18px;
 }
