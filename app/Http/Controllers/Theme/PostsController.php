@@ -22,7 +22,7 @@ class PostsController extends ThemeController
 
     public function index()
     {
-        $this->viewData['posts'] = Post::orderBy('created_at')->paginate(10);
+        $this->viewData['posts'] = Post::orderBy('created_at', 'desc')->paginate();
         return view('theme.home', $this->viewData);
     }
 

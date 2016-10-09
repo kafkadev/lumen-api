@@ -7,10 +7,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tiep Pt</title>
+    <title>TiepPt - TiepPt's Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('theme/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('theme/css/brick-by-brick.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('theme/css/style.css') }}">
 
     <!-- Custom CSS -->
     <link href="{{ asset('theme/css/clean-blog.css') }}" rel="stylesheet">
@@ -40,5 +42,8 @@
     <script src="{{ asset('theme/js/bootstrap.min.js') }}"></script>
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('theme/js/clean-blog.min.js') }}"></script>
+    <script src="{{ asset('theme/js/brick-by-brick.min.js') }}"></script>
+
+    @yield('footer')
 </body>
 </html>

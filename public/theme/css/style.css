@@ -1,0 +1,25 @@
+.single-column .b-by-b-item {
+    width: 100%!important;
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+    #posts .b-by-b-item {
+        width: 100%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    #posts .b-by-b-item {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1025px) {
+    #posts .b-by-b-item {
+        width: 25%;
+    }
+}
+
+#posts .b-by-b-item {
+    /*background-color: #ff4500;*/
+}

@@ -18,16 +18,16 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container">
-        @foreach ($posts as $post)
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+    <div class="container-fluid">
+        <div id="posts">
+            @foreach ($posts as $post)
+                <div>
                     <div class="post-preview">
                         <a href="{{ url("$post->slug") }}">
-                            <h2 class="post-title">
+                            <h2 class="post-title text-center">
                                 {{ $post->title }}
                             </h2>
-                            <p><img src="{{ $post->image }}" alt="" width='100%'></p>
+                            <img src="{{ $post->image }}" alt="" width='100%'>
                             {{-- <h3 class="post-subtitle">
                                 Problems look mighty small from 150 miles up
                             </h3> --}}
@@ -36,8 +36,8 @@
                     </div>
                     <hr>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <!-- Pager -->
@@ -52,4 +52,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <script >
+        $('#posts').layout();
+    </script>
 @endsection
