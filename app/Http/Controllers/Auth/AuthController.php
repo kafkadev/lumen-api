@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -20,7 +21,7 @@ class AuthController extends Controller
      */
     public function showLogin()
     {
-        if (isset($_SESSION["logged_id"])) {
+        if (isset($_SESSION["logged_api_token"])) {
             return redirect($this->redirectTo);
         }
         return view('auth.login');
@@ -31,8 +32,10 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        if (isset($_SESSION["logged_id"])) {
-            session_unset($_SESSION["logged_id"]);
+        if (isset($_SESSION["logged_api_token"])) {
+            $api_token = sha1(time());
+            Auth::user()->update(['api_token' => $api_token]);
+            session_unset($_SESSION["logged_api_token"]);
         }
         return redirect('login');
     }
@@ -42,7 +45,7 @@ class AuthController extends Controller
      */
     public function showRegister()
     {
-        if (isset($_SESSION["logged_id"])) {
+        if (isset($_SESSION["logged_api_token"])) {
             return redirect($this->redirectTo);
         }
         return view('auth.register');
@@ -72,7 +75,10 @@ class AuthController extends Controller
             return redirect('login');
         }
 
-        $_SESSION['logged_id'] = $user->id;
+        $api_token = sha1(time());
+        $user->update(['api_token' => $api_token]);
+
+        $_SESSION['logged_api_token'] = $user->api_token;
         return redirect($this->redirectTo);
     }
 

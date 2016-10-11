@@ -37,11 +37,7 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-
-            if (!isset($_SESSION["logged_id"])) {
-                return redirect('login');
-            }
-
+            return redirect('login');
         }
         return $next($request);
     }

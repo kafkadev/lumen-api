@@ -15,7 +15,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id', 'user_id', 'title', 'slug', 'excerpt', 'content', 'status', 'image'
+        'category_id', 'user_id', 'title', 'slug', 'excerpt', 'content', 'status', 'image', 'views'
     ];
 
     protected $dates = ['deleted_at'];

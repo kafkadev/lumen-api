@@ -29,6 +29,8 @@ class PostsController extends ThemeController
     public function show($slug)
     {
         $this->viewData['post'] = Post::where('slug', $slug)->first();
+        $countViews = $this->viewData['post']->views;
+        $this->viewData['post']->update(['views' => $countViews + 1]);
         return view('theme.post', $this->viewData);
     }
 }

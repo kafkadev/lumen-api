@@ -16,6 +16,6 @@ class Controller extends BaseController
      */
     public function __construct()
     {
-        $this->viewData['auth'] = isset($_SESSION["logged_id"]) ? User::find($_SESSION['logged_id']) : null;
+        //
     }
 }

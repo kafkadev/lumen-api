@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-12 form-group">
                                 <label for="">Author</label>
-                                {!! Form::select('user_id', $users, $auth->id, ['class' => 'form-control']) !!}
+                                {!! Form::select('user_id', $users, Auth::user()->id, ['class' => 'form-control']) !!}
                             </div>
 
                             <div class="col-md-12 form-group">
