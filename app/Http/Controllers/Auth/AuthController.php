@@ -33,8 +33,8 @@ class AuthController extends Controller
     public function logout()
     {
         if (isset($_SESSION["logged_api_token"])) {
-            $api_token = sha1(time());
-            Auth::user()->update(['api_token' => $api_token]);
+            // $api_token = sha1(time());
+            // Auth::user()->update(['api_token' => $api_token]);
             session_unset($_SESSION["logged_api_token"]);
         }
         return redirect('login');
