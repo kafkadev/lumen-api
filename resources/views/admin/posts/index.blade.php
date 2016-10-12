@@ -24,10 +24,10 @@
                         @foreach ($posts as $post)
                             <tr class="gradeU">
                                 <td><a href="{{ url("$post->slug") }}">{{ $post->title }}</a></td>
-                                <td><a href="">{{ $post->user->name }}</a></td>
+                                <td><a href="{{ url('admin/user/' . $post->user_id . '/posts') }}">{{ $post->user->name }}</a></td>
                                 <td>
                                     @if (isset($post->category))
-                                        <a href="{{ url('admin/category/' . $post->category->id . '/edit') }}">{{ $post->category->name }}</a>
+                                        <a href="{{ url('admin/category/' . $post->category_id . '/posts') }}">{{ $post->category->name }}</a>
                                     @endif
                                 </td>
                                 <td></td>

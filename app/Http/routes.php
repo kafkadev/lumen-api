@@ -39,7 +39,7 @@ $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], 
     $app->get('users', 'UsersController@index');
     $app->get('user/create', 'UsersController@create');
     $app->post('user', 'UsersController@store');
-    $app->get('user/{user}', 'UsersController@show');
+    $app->get('user/{user}/posts', 'UsersController@show');
     $app->get('user/{user}/edit', 'UsersController@edit');
     $app->patch('user/{user}', 'UsersController@update');
     $app->delete('user/{user}', 'UsersController@destroy');
@@ -47,7 +47,7 @@ $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], 
     $app->get('categories', 'CategoriesController@index');
     $app->get('category/create', 'CategoriesController@create');
     $app->post('category', 'CategoriesController@store');
-    $app->get('category/{category}', 'CategoriesController@show');
+    $app->get('category/{category}/posts', 'CategoriesController@show');
     $app->get('category/{category}/edit', 'CategoriesController@edit');
     $app->patch('category/{category}', 'CategoriesController@update');
     $app->delete('category/{category}', 'CategoriesController@destroy');

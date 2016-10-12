@@ -41,7 +41,8 @@
                         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info" id="submit-button">Create</button>
+                <button type="submit" class="btn btn-info" id="submit-button">Save</button>
+                <a href="{{ url('admin/users') }}" class="btn btn-default">Cancel</a>
             {!! Form::close() !!}
         </div>
     </div>

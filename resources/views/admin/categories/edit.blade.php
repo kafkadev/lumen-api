@@ -26,7 +26,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info">Update</button>
+                <button type="submit" class="btn btn-info">Save</button>
                 <button type="reset" class="btn btn-default">Cancel</button>
             {!! Form::close() !!}
         </div>

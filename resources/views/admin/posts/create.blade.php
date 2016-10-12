@@ -40,6 +40,11 @@
                             </div>
 
                             <div class="col-md-12 form-group">
+                                <label for="">Status</label>
+                                {!! Form::select('status', $allStatus, null, ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="col-md-12 form-group">
                                 <label for="">Category</label>
                                 <select name="category_id" id="" class="form-control">
                                     {{ showOptionsCategories($categories) }}
@@ -55,7 +60,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info">Create</button>
+                <button type="submit" class="btn btn-info">Save</button>
+                <a href="{{ url('admin/posts') }}" class="btn btn-default">Cancel</a>
             {!! Form::close() !!}
         </div>
     </div>

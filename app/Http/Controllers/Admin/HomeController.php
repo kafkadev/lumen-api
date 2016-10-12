@@ -21,6 +21,7 @@ class HomeController extends AdminController
 
     public function index()
     {
+        $this->viewData['pageTitle'] = 'Admin Dashboard';
         return view('admin.dashboard', $this->viewData);
     }
 }

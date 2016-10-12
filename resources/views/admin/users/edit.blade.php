@@ -42,7 +42,7 @@
                         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info" id="submit-button">Create</button>
+                <button type="submit" class="btn btn-info" id="submit-button">Save</button>
                 <button type="reset" class="btn btn-default">Cancel</button>
             {!! Form::close() !!}
         </div>

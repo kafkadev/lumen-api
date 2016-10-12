@@ -25,6 +25,7 @@ class CategoriesController extends AdminController
      */
     public function index()
     {
+        $this->viewData['pageTitle'] = 'Categories List';
         $this->viewData['categories'] = Category::with('posts')->orderBy('name')->get();
         return view('admin.categories.index', $this->viewData);
     }
@@ -53,9 +54,9 @@ class CategoriesController extends AdminController
      */
     public function show($id)
     {
+        $this->viewData['pageTitle'] = 'Posts List';
         $this->viewData['category'] = Category::findOrFail($id);
-        $this->viewData['categories'] = Category::all();
-        $this->viewData['posts'] = $this->viewData['category']->posts;
+        $this->viewData['posts'] = $this->viewData['category']->posts()->with('category', 'user')->paginate();
         return view('admin.posts.index', $this->viewData);
     }
 
@@ -66,6 +67,7 @@ class CategoriesController extends AdminController
      */
     public function create()
     {
+        $this->viewData['pageTitle'] = 'Create Category';
         $this->viewData['categories'] = Category::orderBy('name')->get();
         return view('admin.categories.create', $this->viewData);
     }
@@ -78,6 +80,7 @@ class CategoriesController extends AdminController
      */
     public function edit($id)
     {
+        $this->viewData['pageTitle'] = 'Edit Category';
         $this->viewData['categories'] = Category::orderBy('name')->get();
         $this->viewData['category'] = Category::findOrFail($id);
         return view('admin.categories.edit', $this->viewData);

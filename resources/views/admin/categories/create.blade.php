@@ -25,7 +25,8 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info">Create</button>
+                <button type="submit" class="btn btn-info">Save</button>
+                <a href="{{ url('admin/categories') }}" class="btn btn-default">Cancel</a>
             {!! Form::close() !!}
         </div>
     </div>

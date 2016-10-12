@@ -16,6 +16,7 @@ class PostsController extends AdminController
      */
     public function index()
     {
+        $this->viewData['pageTitle'] = 'Posts List';
         $this->viewData['posts'] = Post::orderBy('created_at', 'desc')->orderBy('title')->with('category', 'user')->paginate();
         return view('admin.posts.index', $this->viewData);
     }
@@ -27,6 +28,8 @@ class PostsController extends AdminController
      */
     public function create()
     {
+        $this->viewData['pageTitle'] = 'Create Post';
+        $this->viewData['allStatus'] = [0 => 'Draft', 1 => 'Publish'];
         $this->viewData['users'] = User::orderBy('name')->pluck('name', 'id');
         $this->viewData['categories'] = Category::orderBy('name')->get();
         return view('admin.posts.create', $this->viewData);
@@ -61,6 +64,8 @@ class PostsController extends AdminController
      */
     public function edit($id)
     {
+        $this->viewData['pageTitle'] = 'Edit Post';
+        $this->viewData['allStatus'] = [0 => 'Draft', 1 => 'Publish'];
         $this->viewData['users'] = User::orderBy('name')->pluck('name', 'id');
         $this->viewData['post'] = Post::findOrFail($id);
         $this->viewData['categories'] = Category::orderBy('name')->get();

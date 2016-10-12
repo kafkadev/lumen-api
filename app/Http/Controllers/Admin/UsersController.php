@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class UsersController extends AdminController
@@ -24,6 +25,7 @@ class UsersController extends AdminController
     */
     public function index()
     {
+        $this->viewData['pageTitle'] = 'Users List';
         $this->viewData['users'] = User::orderBy('created_at', 'desc')->orderBy('username')->with('posts')->paginate(10);
         return view('admin.users.index', $this->viewData);
     }
@@ -35,6 +37,7 @@ class UsersController extends AdminController
     */
     public function create()
     {
+        $this->viewData['pageTitle'] = 'Create User';
         $this->viewData['roleOptions'] = User::getAllRoles();
         return view('admin.users.create', $this->viewData);
     }
@@ -57,6 +60,14 @@ class UsersController extends AdminController
         User::create($data);
     }
 
+    public function show($id)
+    {
+        $this->viewData['pageTitle'] = 'Posts List';
+        $this->viewData['user'] = User::findOrfail($id);
+        $this->viewData['posts'] = $this->viewData['user']->posts()->with('category', 'user')->paginate();
+        return view('admin.posts.index', $this->viewData);
+    }
+
     /**
     * Show the form for editing the specified resource.
     *
@@ -65,6 +76,7 @@ class UsersController extends AdminController
     */
     public function edit($id)
     {
+        $this->viewData['pageTitle'] = 'Edit User';
         $this->viewData['user'] = User::findOrfail($id);
         $this->viewData['roleOptions'] = User::getAllRoles();
         return view('admin.users.edit', $this->viewData);
