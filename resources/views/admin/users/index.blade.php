@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <p><a href="{{ url('admin/user/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New</a></p>
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>Avatar</th>
@@ -32,8 +32,8 @@
                                 <td>{{ $user->getRoleName() }}</td>
                                 <td align="center">
                                     {!! Form::open(['method' => 'DELETE', 'url' => "admin/user/$user->id"]) !!}
-                                        <a href="{{ url("admin/user/$user->id/edit") }}" class="btn btn-link btn-xs"><i class="fa fa-pencil"></i></a>
-                                        <button type="submit" class="btn btn-link btn-xs" onclick="return confirm('Are you sure to delete this user?')"><i class="fa fa-trash-o "></i></button>
+                                        <a href="{{ url("admin/user/$user->id/edit") }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')"><i class="fa fa-trash-o "></i></button>
                                     {!! Form::close() !!}
                                 </td>
                             </tr>

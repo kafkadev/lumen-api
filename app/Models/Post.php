@@ -22,6 +22,11 @@ class Post extends Model
 
     protected $guarded = ['id'];
 
+    public function scopeStatus($query)
+    {
+        return $query->where('status', 1);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

@@ -322,3 +322,7 @@ table.dataTable thead .sorting:after {
     color: black;
     padding: 5px 0;
 }
+#side-menu a.active {
+    background-color: #bcbcbc !important;
+    color: #fff;
+}

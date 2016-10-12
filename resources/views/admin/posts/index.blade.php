@@ -34,7 +34,7 @@
                                 <td>{{ $post->created_at }}</td>
                                 <td align="center">
                                     {!! Form::open(['method' => 'DELETE', 'url' => "admin/post/$post->id"]) !!}
-                                        <a href="{{ url("admin/post/$post->id/edit") }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url("admin/post/$post->id/edit") }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this post?')"><i class="fa fa-trash-o "></i></button>
                                     {!! Form::close() !!}
                                 </td>

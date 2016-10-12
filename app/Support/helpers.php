@@ -340,7 +340,7 @@ if ( ! function_exists('showTableCategories'))
                     echo '<td align="center">';
                         echo '<form method="POST" action="' . url("admin/category/$item->id") . '" accept-charset="UTF-8">';
                             echo '<input name="_method" type="hidden" value="DELETE">';
-                            echo '<a href="' . url("admin/category/$item->id/edit") . '" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>';
+                            echo '<a href="' . url("admin/category/$item->id/edit") . '" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>';
                             echo '<button type="submit" class="btn btn-danger btn-xs" onclick="return confirm(' . "'Are you sure to delete this category and its posts?'" . ')"><i class="fa fa-trash-o"></i></button>';
                         echo '</form>';
                     echo '</td>';

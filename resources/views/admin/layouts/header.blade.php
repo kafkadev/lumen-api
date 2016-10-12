@@ -202,7 +202,7 @@
         </li>
         <!-- /.dropdown -->
         <li class="dropdown">
-            <a href="{{ url('/') }}"><i class="fa fa-globe fa-fw"></i></a>
+            <a target="__blank" href="{{ url('/') }}"><i class="fa fa-globe fa-fw"></i></a>
         </li>
         <!-- /.dropdown -->
         <li class="dropdown">
