@@ -26,7 +26,7 @@ class TagsController extends AdminController
     public function index()
     {
         $this->viewData['pageTitle'] = 'Tags List';
-        $this->viewData['tags'] = Tag::orderBy('name')->paginate();
+        $this->viewData['tags'] = Tag::orderBy('name')->with('posttags')->paginate();
         return view('admin.tags.index', $this->viewData);
     }
 
@@ -40,7 +40,6 @@ class TagsController extends AdminController
         $request->merge(array_map('trim', $request->all()));
         $this->validate($request, [
             'name' => 'required',
-            'slug' => 'required|alpha_dash|unique:categories',
         ]);
         $data = $request->all();
         Tag::create($data);
@@ -97,7 +96,6 @@ class TagsController extends AdminController
         $request->merge(array_map('trim', $request->all()));
         $this->validate($request, [
             'name' => 'required',
-            'slug' => 'required|alpha_dash|unique:categories,slug,' . $id,
         ]);
         $data = $request->all();
         $tags = Tag::findOrfail($id);

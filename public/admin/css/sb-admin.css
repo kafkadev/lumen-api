@@ -326,3 +326,6 @@ table.dataTable thead .sorting:after {
     background-color: #bcbcbc !important;
     color: #fff;
 }
+.row-grid {
+    margin-top: 15px;
+}

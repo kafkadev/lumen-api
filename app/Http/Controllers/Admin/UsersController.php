@@ -16,6 +16,8 @@ class UsersController extends AdminController
     public function __construct()
     {
         parent::__construct();
+        $this->viewData['pageTitle'] = 'Users';
+        $this->viewData['roleOptions'] = User::getAllRoles();
     }
 
     /**
@@ -25,21 +27,8 @@ class UsersController extends AdminController
     */
     public function index()
     {
-        $this->viewData['pageTitle'] = 'Users List';
         $this->viewData['users'] = User::orderBy('created_at', 'desc')->orderBy('username')->with('posts')->paginate(10);
         return view('admin.users.index', $this->viewData);
-    }
-
-    /**
-    * Display create form.
-    *
-    * @return Response
-    */
-    public function create()
-    {
-        $this->viewData['pageTitle'] = 'Create User';
-        $this->viewData['roleOptions'] = User::getAllRoles();
-        return view('admin.users.create', $this->viewData);
     }
 
     /**
@@ -62,7 +51,6 @@ class UsersController extends AdminController
 
     public function show($id)
     {
-        $this->viewData['pageTitle'] = 'Posts List';
         $this->viewData['user'] = User::findOrfail($id);
         $this->viewData['posts'] = $this->viewData['user']->posts()->with('category', 'user')->paginate();
         return view('admin.posts.index', $this->viewData);
@@ -76,10 +64,9 @@ class UsersController extends AdminController
     */
     public function edit($id)
     {
-        $this->viewData['pageTitle'] = 'Edit User';
+        $this->viewData['users'] = User::orderBy('created_at', 'desc')->orderBy('username')->with('posts')->paginate(10);
         $this->viewData['user'] = User::findOrfail($id);
-        $this->viewData['roleOptions'] = User::getAllRoles();
-        return view('admin.users.edit', $this->viewData);
+        return view('admin.users.index', $this->viewData);
     }
 
     /**

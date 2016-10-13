@@ -3,11 +3,15 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h2 class="page-header">Users List</h2>
+            <h2 class="page-header">Users</h2>
         </div>
-
-        <div class="col-md-12">
-            <p><a href="{{ url('admin/user/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New</a></p>
+        @include('errors.error_html')
+        @if (isset($user))
+            @include('admin.users.edit')
+        @else
+            @include('admin.users.create')
+        @endif
+        <div class="col-md-12 row-grid">
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>
@@ -47,4 +51,65 @@
         </div>
     </div>
     <!-- /.row -->
+@endsection
+
+
+@section('footer')
+    <script type="text/javascript">
+        $('#create-user').submit(function (e) {
+            e.preventDefault();
+            var form_data = $(this).serialize();
+            $('#submit-button').attr('disabled', 'disabled');
+            $.ajax({
+                type: "POST",
+                url : ADMIN_URL + "/user",
+                data : form_data,
+                success: function(response) {
+                    alert('New user created!');
+                    window.location.reload(true);
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var userErrors = '';
+                    $.each(err, function( index, value ) {
+                        userErrors += '<li>';
+                        userErrors += value[0];
+                        userErrors += '</li>';
+                    });
+                    $('.alert.alert-danger ul').html(userErrors);
+                    $('.alert.alert-danger').css('display', 'block');
+                    $('#submit-button').removeAttr('disabled');
+                }
+            });
+        });
+
+        var userId = $('#user-id').val();
+        $('#edit-user').submit(function (e) {
+            e.preventDefault();
+            var form_data = $(this).serialize();
+            $('#submit-button').attr('disabled', 'disabled');
+            $.ajax({
+                type: "PATCH",
+                url : ADMIN_URL + "/user/" + userId,
+                data : form_data,
+                success: function(response) {
+                    alert('User updated!');
+                    window.location.reload(true);
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    var userErrors = '';
+                    $.each(err, function( index, value ) {
+                        userErrors += '<li>';
+                        userErrors += value[0];
+                        userErrors += '</li>';
+                    });
+                    $('.alert.alert-success').css('display', 'none');
+                    $('.alert.alert-danger ul').html(userErrors);
+                    $('.alert.alert-danger').css('display', 'block');
+                    $('#submit-button').removeAttr('disabled');
+                }
+            });
+        });
+    </script>
 @endsection
