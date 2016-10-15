@@ -29,7 +29,12 @@
         @include('admin.layouts.sidebar')
 
         <div id="page-wrapper">
-            @yield('content')
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="page-header">{{ $pageTitle }}</h2>
+                </div>
+                @yield('content')
+            </div>
         </div>
         @include('admin.layouts.footer')
         <!-- /#page-wrapper -->

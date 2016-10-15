@@ -1,73 +1,77 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="page-header">Update Post</h2>
-        </div>
-        @include('errors.error_html')
-        @include('success.showing_success')
-        <div class="col-md-12">
-            {!! Form::open(['id' => 'edit-post', 'files' => true]) !!}
-                {!! Form::hidden('post-id', $post->id, ['id' => 'post-id']) !!}
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-12 form-group">
-                                <label for="title">Title</label>
-                                {!! Form::text('title', $post->title, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();"]) !!}
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <label for="slug">Slug</label>
-                                {!! Form::text('slug', $post->slug, ['class' => 'form-control', 'id' => 'slug']) !!}
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <label for="excerpt">Excerpt</label>
-                                {!! Form::textarea('excerpt', $post->excerpt, ['class' => 'form-control', 'rows' => 3]) !!}
-                            </div>
-
-                            <div class="col-sm-12 form-group">
-                                <label for="content">Content</label>
-                                {!! Form::textarea('content', $post->content, ['class' => 'form-control', 'id' => 'content']) !!}
-                            </div>
-
+    @include('errors.error_html')
+    @include('success.showing_success')
+    <div class="col-md-12">
+        {!! Form::open(['id' => 'edit-post', 'files' => true]) !!}
+            {!! Form::hidden('post-id', $post->id, ['id' => 'post-id']) !!}
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <label for="title">Title</label>
+                            {!! Form::text('title', $post->title, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();"]) !!}
                         </div>
+
+                        <div class="col-sm-12 form-group">
+                            <label for="slug">Slug</label>
+                            {!! Form::text('slug', $post->slug, ['class' => 'form-control', 'id' => 'slug']) !!}
+                        </div>
+
+                        <div class="col-sm-12 form-group">
+                            <label for="excerpt">Excerpt</label>
+                            {!! Form::textarea('excerpt', $post->excerpt, ['class' => 'form-control', 'rows' => 3]) !!}
+                        </div>
+
+                        <div class="col-sm-12 form-group">
+                            <label for="content">Content</label>
+                            {!! Form::textarea('content', $post->content, ['class' => 'form-control', 'id' => 'content']) !!}
+                        </div>
+
                     </div>
-                    <div class="col-sm-3">
-                        <div class="row">
-                            <div class="col-sm-12 form-group">
-                                <label for="">Author</label>
-                                {!! Form::select('user_id', $users, $post->user_id, ['class' => 'form-control']) !!}
-                            </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <label for="">Author</label>
+                            {!! Form::select('user_id', $users, $post->user_id, ['class' => 'form-control']) !!}
+                        </div>
 
-                            <div class="col-md-12 form-group">
-                                <label for="">Status</label>
-                                {!! Form::select('status', $allStatus, $post->status, ['class' => 'form-control']) !!}
-                            </div>
+                        <div class="col-md-12 form-group">
+                            <label for="">Status</label>
+                            {!! Form::select('status', $allStatus, $post->status, ['class' => 'form-control']) !!}
+                        </div>
 
-                            <div class="col-sm-12 form-group">
-                                <label for="">Category</label>
-                                <select name="category_id" id="" class="form-control">
-                                    {{ showOptionsCategories($categories, $post->category->id) }}
-                                </select>
-                            </div>
+                        <div class="col-sm-12 form-group">
+                            <label for="">Category</label>
+                            <select name="category_id" id="" class="form-control">
+                                {{ showOptionsCategories($categories, $post->category->id) }}
+                            </select>
+                        </div>
 
-                            <div class="col-sm-12 form-group">
-                                <label for="">Feature Image</label>
-                                {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
-                                {!! Form::hidden('remove_image', null, ['id' => 'remove-image']) !!}
-                                <img id="preview" src="{{ $post->image }}" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
-                                <p id="remove-image" style="display: @if ($post->image != null) block @else none @endif"><a style="cursor: pointer">Remove image</a></p>
-                            </div>
+                        <div class="col-md-12 form-group">
+                            <label for="">Tag</label>
+                            @foreach ($tags as $tag)
+                                <div class="checkbox">
+                                    <label>{!! Form::checkbox('tag', $tag->id, $post->tags->contains($tag->id)) !!} {{ $tag->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="col-sm-12 form-group">
+                            <label for="">Feature Image</label>
+                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
+                            {!! Form::hidden('remove_image', null, ['id' => 'remove-image']) !!}
+                            <img id="preview" src="{{ $post->image }}" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
+                            <p id="remove-image" style="display: @if ($post->image != null) block @else none @endif"><a style="cursor: pointer">Remove image</a></p>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info">Save</button>
-                <button type="reset" class="btn btn-default">Cancel</button>
-            {!! Form::close() !!}
-        </div>
+            </div>
+            <button type="submit" class="btn btn-info">Save</button>
+            <button type="reset" class="btn btn-default">Cancel</button>
+        {!! Form::close() !!}
     </div>
     <!-- /.row -->
 @endsection
@@ -102,19 +106,13 @@
         $('#edit-post').submit(function (e) {
             e.preventDefault();
             var form_data = $(this).serialize();
-            console.log(form_data);
-            $('#submit-button').attr('disabled', 'disabled');
             $.ajax({
                 type: "PATCH",
                 url : ADMIN_URL + "/post/" + postId,
-                data: new FormData($("#edit-post")[0]),
-                processData: false,
-                contentType: false,
-                async:false,
+                data : form_data,
                 success: function(response) {
-                    $('.alert.alert-danger').css('display', 'none');
-                    $('.alert.alert-success span').html('Category updated!');
-                    $('.alert.alert-success').css('display', 'block');
+                    alert('Post updated!');
+                    window.location.href = ADMIN_URL + '/posts';
                 },
                 error: function(xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");

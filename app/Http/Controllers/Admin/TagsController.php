@@ -16,6 +16,7 @@ class TagsController extends AdminController
     public function __construct()
     {
         parent::__construct();
+        $this->viewData['pageTitle'] = 'Tags';
     }
 
     /**
@@ -25,7 +26,6 @@ class TagsController extends AdminController
      */
     public function index()
     {
-        $this->viewData['pageTitle'] = 'Tags List';
         $this->viewData['tags'] = Tag::orderBy('name')->with('posttags')->paginate();
         return view('admin.tags.index', $this->viewData);
     }
@@ -53,22 +53,10 @@ class TagsController extends AdminController
      */
     public function show($id)
     {
-        $this->viewData['pageTitle'] = 'Posts List';
-        $this->viewData['category'] = Tag::findOrFail($id);
-        $this->viewData['posts'] = $this->viewData['category']->posts()->with('category', 'user')->paginate();
-        return view('admin.tags.index', $this->viewData);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        $this->viewData['pageTitle'] = 'Create Tag';
-        $this->viewData['categories'] = Tag::orderBy('name')->get();
-        return view('admin.tags.create', $this->viewData);
+        $this->viewData['tag'] = Tag::findOrFail($id);
+        $this->viewData['posts'] = $this->viewData['tag']->posts()->paginate();
+        $this->viewData['posts']->load(['category', 'user']);
+        return view('admin.posts.index', $this->viewData);
     }
 
     /**
@@ -79,10 +67,9 @@ class TagsController extends AdminController
      */
     public function edit($id)
     {
-        $this->viewData['pageTitle'] = 'Edit Tag';
-        $this->viewData['categories'] = Tag::orderBy('name')->get();
-        $this->viewData['category'] = Tag::findOrFail($id);
-        return view('admin.tags.edit', $this->viewData);
+        $this->viewData['tags'] = Tag::orderBy('name')->get();
+        $this->viewData['tag'] = Tag::findOrFail($id);
+        return view('admin.tags.index', $this->viewData);
     }
 
     /**

@@ -1,71 +1,74 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="page-header">New Post</h2>
-        </div>
-        @include('errors.error_html')
-        <div class="col-md-12">
-            {!! Form::open(['id' => 'create-post', 'files' => true]) !!}
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="title">Title</label>
-                                {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();"]) !!}
-                            </div>
-
-                            <div class="col-md-12 form-group">
-                                <label for="slug">Slug</label>
-                                {!! Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) !!}
-                            </div>
-
-                            <div class="col-md-12 form-group">
-                                <label for="excerpt">Excerpt</label>
-                                {!! Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => 3]) !!}
-                            </div>
-
-                            <div class="col-md-12 form-group">
-                                <label for="content">Content</label>
-                                {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'content']) !!}
-                            </div>
+    @include('errors.error_html')
+    <div class="col-md-12">
+        {!! Form::open(['id' => 'create-post', 'files' => true]) !!}
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="title">Title</label>
+                            {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();"]) !!}
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="">Author</label>
-                                {!! Form::select('user_id', $users, Auth::user()->id, ['class' => 'form-control']) !!}
-                            </div>
 
-                            <div class="col-md-12 form-group">
-                                <label for="">Status</label>
-                                {!! Form::select('status', $allStatus, null, ['class' => 'form-control']) !!}
-                            </div>
+                        <div class="col-md-12 form-group">
+                            <label for="slug">Slug</label>
+                            {!! Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) !!}
+                        </div>
 
-                            <div class="col-md-12 form-group">
-                                <label for="">Category</label>
-                                <select name="category_id" id="" class="form-control">
-                                    {{ showOptionsCategories($categories) }}
-                                </select>
-                            </div>
+                        <div class="col-md-12 form-group">
+                            <label for="excerpt">Excerpt</label>
+                            {!! Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                        </div>
 
-                            <div class="col-md-12 form-group">
-                                <label for="">Feature Image</label>
-                                {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
-                                <img id="preview" src="" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
-                                <p id="remove-image" style="display: none"><a style="cursor: pointer">Remove image</a></p>
-                            </div>
+                        <div class="col-md-12 form-group">
+                            <label for="content">Content</label>
+                            {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'content']) !!}
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info">Save</button>
-                <a href="{{ url('admin/posts') }}" class="btn btn-default">Cancel</a>
-            {!! Form::close() !!}
-        </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="">Author</label>
+                            {!! Form::select('user_id', $users, Auth::user()->id, ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label for="">Status</label>
+                            {!! Form::select('status', $allStatus, null, ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label for="">Category</label>
+                            <select name="category_id" id="" class="form-control">
+                                {{ showOptionsCategories($categories) }}
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label for="">Tag</label>
+                            @foreach ($tags as $tag)
+                                <div class="checkbox">
+                                    <label>{!! Form::checkbox('tag', $tag->id) !!} {{ $tag->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label for="">Feature Image</label>
+                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
+                            <img id="preview" src="" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
+                            <p id="remove-image" style="display: none"><a style="cursor: pointer">Remove image</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info">Save</button>
+            <a href="{{ url('admin/posts') }}" class="btn btn-default">Cancel</a>
+        {!! Form::close() !!}
     </div>
-    <!-- /.row -->
 @endsection
 
 @section('footer')
@@ -97,7 +100,6 @@
         $('#create-post').submit(function (e) {
             e.preventDefault();
             var form_data = $(this).serialize();
-            $('#submit-button').attr('disabled', 'disabled');
             $.ajax({
                 type: "POST",
                 url : ADMIN_URL + "/post",

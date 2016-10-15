@@ -19,7 +19,7 @@
                 <a class="{{ setActive(['admin/user']) }}" href="{{ url('admin/users') }}"><i class="fa fa-users fa-fw"></i> Users</a>
                 <!-- /.nav-second-level -->
             </li>
-            <li class="{{ setActive(['admin/post', 'admin/category', 'admin/categories']) }}">
+            <li class="{{ setActive(['admin/post', 'admin/category', 'admin/categories', 'admin/tag']) }}">
                 <a href="#"><i class="fa fa-book fa-fw"></i> Posts<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a class="{{ setActive(['admin/post/create']) }}" href="{{ url('admin/post/create') }}">New Post</a></li>

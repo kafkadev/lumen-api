@@ -55,7 +55,7 @@ $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], 
     $app->get('tags', 'TagsController@index');
     $app->get('tag/create', 'TagsController@create');
     $app->post('tag', 'TagsController@store');
-    $app->get('tag/{tag}', 'TagsController@show');
+    $app->get('tag/{tag}/posts', 'TagsController@show');
     $app->get('tag/{tag}/edit', 'TagsController@edit');
     $app->patch('tag/{tag}', 'TagsController@update');
     $app->delete('tag/{tag}', 'TagsController@destroy');

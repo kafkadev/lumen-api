@@ -9,6 +9,9 @@ class Post extends Model
 {
     use SoftDeletes;
 
+    const IS_PUBLISH = 1;
+    const IS_DRAFT = 0;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +24,14 @@ class Post extends Model
     protected $dates = ['deleted_at'];
 
     protected $guarded = ['id'];
+
+    public function getStatus()
+    {
+        if ($this->status == self::IS_PUBLISH) {
+            return 'Publish';
+        }
+        return 'Draft';
+    }
 
     public function scopeStatus($query)
     {
@@ -39,7 +50,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(PostTag::class, 'post_tag', 'tag_id', 'post_id');
+        return $this->belongsToMany(Tag::class, 'post_tag');
     }
 
     public function posttags()

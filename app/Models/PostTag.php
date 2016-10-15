@@ -18,14 +18,14 @@ class PostTag extends Model
 
     public $timestamps = false;
 
-	public function posts()
+	public function post()
 	{
 		return $this->belongsTo(Post::class);
 	}
 
-	public function tags()
+	public function tag()
 	{
-		return $this->hasOne(Tag::class);
+		return $this->belongsTo(Tag::class);
 	}
 
 }

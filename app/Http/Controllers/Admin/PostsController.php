@@ -5,10 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends AdminController
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->viewData['pageTitle'] = 'Posts';
+        $this->viewData['allStatus'] = [0 => 'Draft', 1 => 'Publish'];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +29,6 @@ class PostsController extends AdminController
      */
     public function index()
     {
-        $this->viewData['pageTitle'] = 'Posts List';
         $this->viewData['posts'] = Post::orderBy('created_at', 'desc')->orderBy('title')->with('category', 'user')->paginate();
         return view('admin.posts.index', $this->viewData);
     }
@@ -28,8 +40,7 @@ class PostsController extends AdminController
      */
     public function create()
     {
-        $this->viewData['pageTitle'] = 'Create Post';
-        $this->viewData['allStatus'] = [0 => 'Draft', 1 => 'Publish'];
+        $this->viewData['tags'] = Tag::all();
         $this->viewData['users'] = User::orderBy('name')->pluck('name', 'id');
         $this->viewData['categories'] = Category::orderBy('name')->get();
         return view('admin.posts.create', $this->viewData);
@@ -64,8 +75,7 @@ class PostsController extends AdminController
      */
     public function edit($id)
     {
-        $this->viewData['pageTitle'] = 'Edit Post';
-        $this->viewData['allStatus'] = [0 => 'Draft', 1 => 'Publish'];
+        $this->viewData['tags'] = Tag::all();
         $this->viewData['users'] = User::orderBy('name')->pluck('name', 'id');
         $this->viewData['post'] = Post::findOrFail($id);
         $this->viewData['categories'] = Category::orderBy('name')->get();
