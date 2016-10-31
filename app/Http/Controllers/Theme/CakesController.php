@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class PostsController extends ThemeController
+class CakesController extends ThemeController
 {
     /**
      * Create a new controller instance.
@@ -22,8 +22,8 @@ class PostsController extends ThemeController
 
     public function index()
     {
-        $this->viewData['posts'] = Post::status()->with('user')->orderBy('created_at', 'desc')->paginate(12);
-        return view('theme.posts', $this->viewData);
+        $this->viewData['posts'] = Post::status()->cakes()->with('user')->orderBy('created_at', 'desc')->paginate(12);
+        return view('theme.cakes', $this->viewData);
     }
 
     public function show($slug)
@@ -31,6 +31,6 @@ class PostsController extends ThemeController
         $this->viewData['post'] = Post::where('slug', $slug)->firstOrFail();
         $countViews = $this->viewData['post']->views;
         $this->viewData['post']->update(['views' => $countViews + 1]);
-        return view('theme.post', $this->viewData);
+        return view('theme.cake', $this->viewData);
     }
 }

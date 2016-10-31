@@ -99,10 +99,6 @@
                         userErrors += value[0];
                         userErrors += '</li>';
                     });
-                    $('.alert.alert-success').css('display', 'none');
-                    $('.alert.alert-danger ul').html(userErrors);
-                    $('.alert.alert-danger').css('display', 'block');
-                    $('#submit-button').removeAttr('disabled');
                 }
             });
         });

@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-12">
         <div class="table-responsive row-grid">
-            <table class="table table-hover">
+            <table class="table table-hover" id="table-posts">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -46,9 +46,22 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="text-right">
-                {!! $posts->links() !!}
-            </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <link href="{{ asset('admin/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#table-posts').DataTable({
+                columnDefs: [
+                    {sortable: false, targets: [6]},
+                ],
+                "order": [ 5, 'desc' ]
+            });
+        });
+    </script>
 @endsection

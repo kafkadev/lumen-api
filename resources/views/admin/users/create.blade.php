@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-6 form-group">
                 <label for="name">Name</label>
-                {!! Form::text('name', null, ['class' => 'form-control', 'required', 'minlength' => 5, 'maxlength' => 15]) !!}
+                {!! Form::text('name', null, ['class' => 'form-control', 'required', 'minlength' => 5, 'maxlength' => 25]) !!}
             </div>
             <div class="col-sm-6 form-group">
                 <label for="username">Username</label>

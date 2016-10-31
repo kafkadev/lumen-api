@@ -30,7 +30,7 @@ class PostsController extends AdminController
      */
     public function index()
     {
-        $this->viewData['posts'] = Post::orderBy('created_at', 'desc')->orderBy('title')->with('category', 'user')->paginate();
+        $this->viewData['posts'] = Post::with('category', 'user')->get();
         return view('admin.posts.index', $this->viewData);
     }
 

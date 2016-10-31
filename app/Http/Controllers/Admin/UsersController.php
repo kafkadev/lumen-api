@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Auth;
 
 class UsersController extends AdminController
 {
@@ -40,7 +41,7 @@ class UsersController extends AdminController
     {
         $request->merge(array_map('trim', $request->except(['password', 'password_confirmation'])));
         $this->validate($request, [
-            'name' => 'required|min:5|max:15',
+            'name' => 'required|min:5|max:25',
             'username' => 'required|max:15|min:5|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:5',
@@ -78,13 +79,16 @@ class UsersController extends AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|min:5|max:15',
+            'name' => 'required|min:5|max:25',
             'username' => 'required|max:15|min:5|unique:users,username,'.$id,
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'confirmed|min:5',
         ]);
         $data = $request->has('password') ? $request->all() : $request->except(['password', 'password_confirmation']);
         $user = User::findOrfail($id);
+        if (Auth::user()->isAdmin() && $data['role'] != User::IS_ADMIN && Auth::user()->id == $id) {
+            return response()->json(['error' => $_SESSION['error']]);
+        }
         $user->update($data);
     }
 

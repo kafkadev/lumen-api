@@ -4,17 +4,17 @@
         <div class="row">
             <div class="col-sm-6 form-group">
                 <label for="name">Name</label>
-                {!! Form::text('name', $user->name, ['class' => 'form-control', 'required']) !!}
+                {!! Form::text('name', $user->name, ['class' => 'form-control', 'required', 'minlength' => 5, 'maxlength' => 25]) !!}
             </div>
             <div class="col-sm-6 form-group">
                 <label for="username">Username</label>
-                {!! Form::text('username', $user->username, ['class' => 'form-control', 'required']) !!}
+                {!! Form::text('username', $user->username, ['class' => 'form-control', 'required', 'minlength' => 5, 'maxlength' => 15]) !!}
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 form-group">
                 <label for="email">Email</label>
-                {!! Form::text('email', $user->email, ['class' => 'form-control', 'required']) !!}
+                {!! Form::email('email', $user->email, ['class' => 'form-control', 'required']) !!}
             </div>
             <div class="col-sm-6 form-group">
                 <label for="password">Role</label>

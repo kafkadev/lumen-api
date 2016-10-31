@@ -3,7 +3,6 @@
     2. Create file .env
     3. composer install
     4. php artisan migrate:refresh --seed
-    5. 
 
 
 # Lumen PHP Framework
