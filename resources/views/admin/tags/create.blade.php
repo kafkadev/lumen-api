@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12 form-group">
                 <label for="name">Name</label>
-                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                {!! Form::text('name', null, ['class' => 'form-control', 'required', 'maxlength' => 20]) !!}
             </div>
         </div>
-        <button type="submit" class="btn btn-info">Save</button>
-        <a href="{{ url('admin/tags') }}" class="btn btn-default">Cancel</a>
+        <button type="reset" class="btn btn-default" id="submit-button">Reset</button>
+        <button type="submit" class="btn btn-info" id="submit-button">Save</button>
     {!! Form::close() !!}
 </div>
 

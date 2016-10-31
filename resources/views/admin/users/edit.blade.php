@@ -4,17 +4,17 @@
         <div class="row">
             <div class="col-sm-6 form-group">
                 <label for="name">Name</label>
-                {!! Form::text('name', $user->name, ['class' => 'form-control']) !!}
+                {!! Form::text('name', $user->name, ['class' => 'form-control', 'required']) !!}
             </div>
             <div class="col-sm-6 form-group">
                 <label for="username">Username</label>
-                {!! Form::text('username', $user->username, ['class' => 'form-control']) !!}
+                {!! Form::text('username', $user->username, ['class' => 'form-control', 'required']) !!}
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 form-group">
                 <label for="email">Email</label>
-                {!! Form::text('email', $user->email, ['class' => 'form-control']) !!}
+                {!! Form::text('email', $user->email, ['class' => 'form-control', 'required']) !!}
             </div>
             <div class="col-sm-6 form-group">
                 <label for="password">Role</label>
@@ -34,7 +34,8 @@
                 {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
             </div>
         </div>
+        <a class="btn btn-default" href="{{ url('admin/users') }}">Cancel</a>
+        <button type="reset" class="btn btn-default">Reset</button>
         <button type="submit" class="btn btn-info" id="submit-button">Save</button>
-        <button type="reset" class="btn btn-default">Cancel</button>
     {!! Form::close() !!}
 </div>

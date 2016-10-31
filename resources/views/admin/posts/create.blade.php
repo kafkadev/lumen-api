@@ -3,28 +3,28 @@
 @section('content')
     @include('errors.error_html')
     <div class="col-md-12">
-        {!! Form::open(['id' => 'create-post', 'files' => true]) !!}
+        {!! Form::open(['method' => 'post', 'url' => 'admin/post', 'id' => 'create-post', 'files' => true]) !!}
             <div class="row">
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="title">Title</label>
-                            {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();"]) !!}
+                            {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();", 'required']) !!}
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label for="slug">Slug</label>
-                            {!! Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug']) !!}
+                            {!! Form::text('slug', null, ['class' => 'form-control', 'id' => 'slug', 'required']) !!}
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label for="excerpt">Excerpt</label>
-                            {!! Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                            {!! Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label for="content">Content</label>
-                            {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'content']) !!}
+                            {!! Form::textarea('content', null, ['class' => 'form-control content', 'id' => 'content', 'required']) !!}
                         </div>
                     </div>
                 </div>
@@ -43,6 +43,7 @@
                         <div class="col-md-12 form-group">
                             <label for="">Category</label>
                             <select name="category_id" id="" class="form-control">
+                                <option value="0">None</option>
                                 {{ showOptionsCategories($categories) }}
                             </select>
                         </div>
@@ -51,22 +52,23 @@
                             <label for="">Tag</label>
                             @foreach ($tags as $tag)
                                 <div class="checkbox">
-                                    <label>{!! Form::checkbox('tag', $tag->id) !!} {{ $tag->name }}</label>
+                                    <label>{!! Form::checkbox('tag[]', $tag->id) !!} {{ $tag->name }}</label>
                                 </div>
                             @endforeach
                         </div>
 
                         <div class="col-md-12 form-group">
                             <label for="">Feature Image</label>
-                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
+                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control', 'accept' => 'image/png, image/jpeg, image/gif']) !!}
                             <img id="preview" src="" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
                             <p id="remove-image" style="display: none"><a style="cursor: pointer">Remove image</a></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info">Save</button>
-            <a href="{{ url('admin/posts') }}" class="btn btn-default">Cancel</a>
+            <a class="btn btn-default" onclick="return confirm('Changes you may not be saved!')" href="{{ url('admin/posts') }}">Cancel</a>
+            <button type="reset" onclick="return confirm('Changes you will be deleted!')" class="btn btn-default">Reset</button>
+            <button type="submit" class="btn btn-info" id="submit-button">Save</button>
         {!! Form::close() !!}
     </div>
 @endsection
@@ -75,7 +77,7 @@
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
     <script type="text/javascript">
-        CKEDITOR.replace( 'content' );
+        CKEDITOR.replace('content');
 
         function createSlug()
         {
@@ -96,32 +98,6 @@
 
             document.getElementById("slug").value = str;
         }
-
-        $('#create-post').submit(function (e) {
-            e.preventDefault();
-            var form_data = $(this).serialize();
-            $.ajax({
-                type: "POST",
-                url : ADMIN_URL + "/post",
-                data : form_data,
-                success: function(response) {
-                    alert('New post created!');
-                    window.location.href = ADMIN_URL + '/posts';
-                },
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    var postErrors = '';
-                    $.each(err, function( index, value ) {
-                        postErrors += '<li>';
-                        postErrors += value[0];
-                        postErrors += '</li>';
-                    });
-                    $('.alert.alert-danger ul').html(postErrors);
-                    $('.alert.alert-danger').css('display', 'block');
-                    $('#submit-button').removeAttr('disabled');
-                }
-            });
-        });
 
         function readURL(input) {
             if (input.files && input.files[0]) {

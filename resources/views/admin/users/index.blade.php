@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    @include('success.showing_success')
     @include('errors.error_html')
     @if (isset($user))
         @include('admin.users.edit')
@@ -9,7 +10,7 @@
     @endif
     <div class="col-md-12 row-grid">
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Avatar</th>
@@ -25,15 +26,15 @@
                     @foreach ($users as $user)
                         <tr>
                             <td><img src="{{ getGravatar($user->email) }}" alt=""></td>
-                            <td>{{ $user->username }}</td>
+                            <td><a href="{{ url("admin/user/$user->id/edit") }}">{{ $user->username }}</a></td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td align="right"><a href="{{ url("admin/user/$user->id/posts") }}">{{ $user->posts->count() }}</a></td>
+                            <td><a href="{{ url("admin/user/$user->id/posts") }}">{{ $user->posts->count() }}</a></td>
                             <td>{{ $user->getRoleName() }}</td>
                             <td align="center">
                                 {!! Form::open(['method' => 'DELETE', 'url' => "admin/user/$user->id"]) !!}
-                                    <a href="{{ url("admin/user/$user->id/edit") }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
-                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')"><i class="fa fa-trash-o "></i></button>
+                                    <a title="Edit" href="{{ url("admin/user/$user->id/edit") }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <button title="Delete" type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete this user?')"><i class="fa fa-trash-o "></i></button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

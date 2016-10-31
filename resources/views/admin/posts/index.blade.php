@@ -1,12 +1,13 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    @include('success.showing_success')
     <div class="col-md-12">
-        <a href="{{ url('admin/post/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New</a>
+        <a href="{{ url('admin/post/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New Post</a>
     </div>
     <div class="col-md-12">
         <div class="table-responsive row-grid">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -21,7 +22,7 @@
                 <tbody>
                     @foreach ($posts as $post)
                         <tr class="gradeU">
-                            <td><a href="{{ url("$post->slug") }}">{{ $post->title }}</a></td>
+                            <td><a target="__blank" href="{{ url("$post->slug") }}">{{ $post->title }}</a></td>
                             <td><a href="{{ url('admin/user/' . $post->user_id . '/posts') }}">{{ $post->user->name }}</a></td>
                             <td>
                                 @if (isset($post->category))

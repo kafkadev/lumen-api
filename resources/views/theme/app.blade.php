@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TiepPt - TiepPt's Blog</title>
+    <title>TiepPt's Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('theme/css/bootstrap.min.css') }}" rel="stylesheet">

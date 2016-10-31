@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    @include('success.showing_success')
     @include('errors.error_html')
     @if (isset($tag))
         @include('admin.tags.edit')
@@ -9,7 +10,7 @@
     @endif
     <div class="col-md-12 row-grid">
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Tag</th>
@@ -20,8 +21,8 @@
                 <tbody>
                     @foreach ($tags as $tag)
                         <tr>
-                            <td>{{ $tag->name }}</td>
-                            <td align="right"><a href="{{ url("admin/tag/$tag->id/posts") }}">{{ $tag->posttags->count() }}</a></td>
+                            <td><a href="{{ url("admin/tag/$tag->id/edit") }}">{{ $tag->name }}</a></td>
+                            <td><a href="{{ url("admin/tag/$tag->id/posts") }}">{{ $tag->posttags->count() }}</a></td>
                             <td align="center">
                                 {!! Form::open(['method' => 'DELETE', 'url' => "admin/tag/$tag->id"]) !!}
                                     <a href="{{ url("admin/tag/$tag->id/edit") }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>

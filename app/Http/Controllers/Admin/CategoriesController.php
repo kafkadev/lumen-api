@@ -40,8 +40,8 @@ class CategoriesController extends AdminController
     {
         $request->merge(array_map('trim', $request->all()));
         $this->validate($request, [
-            'name' => 'required',
-            'slug' => 'required|alpha_dash|unique:categories',
+            'name' => 'required|max:20',
+            'slug' => 'required|unique:categories',
         ]);
         $data = $request->all();
         Category::create($data);
@@ -84,8 +84,8 @@ class CategoriesController extends AdminController
     {
         $request->merge(array_map('trim', $request->all()));
         $this->validate($request, [
-            'name' => 'required',
-            'slug' => 'required|alpha_dash|unique:categories,slug,'.$id,
+            'name' => 'required|max:20',
+            'slug' => 'required|unique:categories,slug,'.$id,
         ]);
         $data = $request->all();
         $category = Category::findOrfail($id);
@@ -101,6 +101,7 @@ class CategoriesController extends AdminController
     public function destroy($id)
     {
         Category::destroy($id);
+        $_SESSION['success'] = 'Delete Category successfully!';
         return redirect('admin/categories');
     }
 }

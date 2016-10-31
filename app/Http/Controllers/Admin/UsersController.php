@@ -40,10 +40,10 @@ class UsersController extends AdminController
     {
         $request->merge(array_map('trim', $request->except(['password', 'password_confirmation'])));
         $this->validate($request, [
-            'name' => 'required|max:50|min:6|unique:users',
-            'username' => 'required|alpha_dash|max:50|min:6|unique:users',
-            'email' => 'required|email|max:50|unique:users',
-            'password' => 'required|confirmed|min:6|max:50',
+            'name' => 'required|min:5|max:15',
+            'username' => 'required|max:15|min:5|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:5',
         ]);
         $data = $request->all();
         User::create($data);
@@ -78,10 +78,10 @@ class UsersController extends AdminController
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|max:50|min:6|unique:users,name,'.$id,
-            'username' => 'required|alpha_dash|max:50|min:6|unique:users,username,'.$id,
-            'email' => 'required|email|max:50|unique:users,email,'.$id,
-            'password' => 'confirmed|min:6|max:50',
+            'name' => 'required|min:5|max:15',
+            'username' => 'required|max:15|min:5|unique:users,username,'.$id,
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'confirmed|min:5',
         ]);
         $data = $request->has('password') ? $request->all() : $request->except(['password', 'password_confirmation']);
         $user = User::findOrfail($id);
@@ -97,6 +97,7 @@ class UsersController extends AdminController
     public function destroy($id)
     {
         User::destroy($id);
+        $_SESSION['success'] = 'Delete User successfully!';
         return redirect('admin/users');
     }
 }

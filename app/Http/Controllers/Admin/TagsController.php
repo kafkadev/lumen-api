@@ -39,7 +39,7 @@ class TagsController extends AdminController
     {
         $request->merge(array_map('trim', $request->all()));
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|max:20|unique:tags',
         ]);
         $data = $request->all();
         Tag::create($data);
@@ -82,7 +82,7 @@ class TagsController extends AdminController
     {
         $request->merge(array_map('trim', $request->all()));
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|max:20|unique:tags,name,'.$id,
         ]);
         $data = $request->all();
         $tags = Tag::findOrfail($id);
@@ -98,6 +98,7 @@ class TagsController extends AdminController
     public function destroy($id)
     {
         Tag::destroy($id);
+        $_SESSION['success'] = 'Delete Tag successfully!';
         return redirect('admin/tags');
     }
 }

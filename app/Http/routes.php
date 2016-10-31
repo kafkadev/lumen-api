@@ -76,5 +76,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Theme'], function () use ($app
     $app->post('contact', 'HomeController@postContact');
     $app->get('profile', 'ProfileController@index');
     $app->get('blog', 'PostsController@index');
+    $app->get('cakes', 'CakesController@index');
+    $app->get('cake/{post}', 'CakesController@show');
     $app->get('{post}', 'PostsController@show');
 });

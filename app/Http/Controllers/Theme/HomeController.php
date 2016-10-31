@@ -22,7 +22,7 @@ class HomeController extends ThemeController
 
     public function index()
     {
-        $this->viewData['posts'] = Post::status()->orderBy('created_at', 'desc')->paginate(12);
+        $this->viewData['posts'] = Post::status()->with('user')->orderBy('created_at', 'desc')->paginate(12);
         return view('theme.home', $this->viewData);
     }
 

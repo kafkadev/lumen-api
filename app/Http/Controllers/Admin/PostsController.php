@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Auth;
 
 class PostsController extends AdminController
 {
@@ -56,15 +57,17 @@ class PostsController extends AdminController
         $request->merge(array_map('trim', $request->except(['excerpt', 'content'])));
         $this->validate($request, [
             'title' => 'required',
-            'slug' => 'required|alpha_dash|unique:posts',
+            'slug' => 'required|unique:posts',
             'excerpt' => 'required',
-            'image' => 'image|max:2048',
+            'image' => 'image',
         ]);
         $data = $request->all();
         if ($request->hasFile('image')) {
             $data['image'] = $this->setUrlImage($request);
         }
         Post::create($data);
+        $_SESSION['success'] = 'Create Post successfully!';
+        return redirect('admin/posts');
     }
 
     /**
@@ -93,9 +96,9 @@ class PostsController extends AdminController
         $request->merge(array_map('trim', $request->except(['excerpt', 'content'])));
         $this->validate($request, [
             'title' => 'required',
-            'slug' => 'required|alpha_dash|unique:posts,slug,' . $id,
+            'slug' => 'required|unique:posts,slug,' . $id,
             'excerpt' => 'required',
-            'image' => 'image|max:2048',
+            'image' => 'image',
         ]);
         $data = $request->all();
         if ($request->hasFile('image')) {
@@ -106,6 +109,8 @@ class PostsController extends AdminController
         }
         $post = Post::findOrfail($id);
         $post->update($data);
+        $_SESSION['success'] = 'Update Post successfully!';
+        return redirect('admin/posts');
     }
 
     /**
@@ -117,6 +122,7 @@ class PostsController extends AdminController
     public function destroy($id)
     {
         Post::destroy($id);
+        $_SESSION['success'] = 'Delete Post successfully!';
         return redirect('admin/posts');
     }
 
@@ -128,7 +134,7 @@ class PostsController extends AdminController
      */
     private function setUrlImage($request)
     {
-        $fileName = date("Ymdhis") . $this->viewData['auth']->username . $request->file('image')->getClientOriginalName();
+        $fileName = date("Ymdhis") . Auth::user()->username . $request->file('image')->getClientOriginalName();
         $request->file('image')->move(public_path() . '/posts/', $fileName);
         return url('/') . '/posts/' . $fileName;
     }

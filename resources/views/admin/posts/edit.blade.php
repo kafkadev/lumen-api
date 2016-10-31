@@ -4,29 +4,29 @@
     @include('errors.error_html')
     @include('success.showing_success')
     <div class="col-md-12">
-        {!! Form::open(['id' => 'edit-post', 'files' => true]) !!}
+        {!! Form::open(['method' => 'PATCH', 'id' => 'edit-post', 'url' => "admin/post/$post->id", 'files' => true]) !!}
             {!! Form::hidden('post-id', $post->id, ['id' => 'post-id']) !!}
             <div class="row">
                 <div class="col-sm-9">
                     <div class="row">
                         <div class="col-sm-12 form-group">
                             <label for="title">Title</label>
-                            {!! Form::text('title', $post->title, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();"]) !!}
+                            {!! Form::text('title', $post->title, ['class' => 'form-control', 'id' => 'title', 'onkeyup' => "createSlug();", 'onchange' => "createSlug();", 'required']) !!}
                         </div>
 
                         <div class="col-sm-12 form-group">
                             <label for="slug">Slug</label>
-                            {!! Form::text('slug', $post->slug, ['class' => 'form-control', 'id' => 'slug']) !!}
+                            {!! Form::text('slug', $post->slug, ['class' => 'form-control', 'id' => 'slug', 'required']) !!}
                         </div>
 
                         <div class="col-sm-12 form-group">
                             <label for="excerpt">Excerpt</label>
-                            {!! Form::textarea('excerpt', $post->excerpt, ['class' => 'form-control', 'rows' => 3]) !!}
+                            {!! Form::textarea('excerpt', $post->excerpt, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                         </div>
 
                         <div class="col-sm-12 form-group">
                             <label for="content">Content</label>
-                            {!! Form::textarea('content', $post->content, ['class' => 'form-control', 'id' => 'content']) !!}
+                            {!! Form::textarea('content', $post->content, ['class' => 'form-control', 'id' => 'content', 'required']) !!}
                         </div>
 
                     </div>
@@ -46,7 +46,8 @@
                         <div class="col-sm-12 form-group">
                             <label for="">Category</label>
                             <select name="category_id" id="" class="form-control">
-                                {{ showOptionsCategories($categories, $post->category->id) }}
+                                <option value="0">None</option>
+                                {{ showOptionsCategories($categories, $post->category_id) }}
                             </select>
                         </div>
 
@@ -69,8 +70,9 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info">Save</button>
-            <button type="reset" class="btn btn-default">Cancel</button>
+            <a class="btn btn-default" onclick="return confirm('Changes you may not be saved!')" href="{{ url('admin/posts') }}">Cancel</a>
+            <button type="reset" onclick="return confirm('Changes you will be deleted!')" class="btn btn-default">Reset</button>
+            <button type="submit" class="btn btn-info" id="submit-button">Save</button>
         {!! Form::close() !!}
     </div>
     <!-- /.row -->
@@ -101,33 +103,6 @@
 
             document.getElementById("slug").value = str;
         }
-
-        var postId = {{ $post->id }};
-        $('#edit-post').submit(function (e) {
-            e.preventDefault();
-            var form_data = $(this).serialize();
-            $.ajax({
-                type: "PATCH",
-                url : ADMIN_URL + "/post/" + postId,
-                data : form_data,
-                success: function(response) {
-                    alert('Post updated!');
-                    window.location.href = ADMIN_URL + '/posts';
-                },
-                error: function(xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    var postErrors = '';
-                    $.each(err, function( index, value ) {
-                        postErrors += '<li>';
-                        postErrors += value[0];
-                        postErrors += '</li>';
-                    });
-                    $('.alert.alert-danger ul').html(postErrors);
-                    $('.alert.alert-danger').css('display', 'block');
-                    $('#submit-button').removeAttr('disabled');
-                }
-            });
-        });
 
         function readURL(input) {
             if (input.files && input.files[0]) {

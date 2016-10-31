@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    @include('success.showing_success')
     @include('errors.error_html')
     @if (isset($category))
         @include('admin.categories.edit')
@@ -9,7 +10,7 @@
     @endif
     <div class="col-md-12 row-grid">
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Category</th>
