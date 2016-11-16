@@ -11,6 +11,8 @@ class Post extends Model
 
     const IS_PUBLISH = 1;
     const IS_DRAFT = 0;
+    const IS_CAKES = 2;
+    const IS_TECHS = 1;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +38,16 @@ class Post extends Model
     public function scopeStatus($query)
     {
         return $query->where('status', 1);
+    }
+
+    public function scopeTechs($query)
+    {
+        return $query->where('category_id', self::IS_TECHS);
+    }
+
+    public function scopeCakes($query)
+    {
+        return $query->where('category_id', self::IS_CAKES);
     }
 
     public function category()

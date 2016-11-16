@@ -18,6 +18,11 @@
                         </div>
 
                         <div class="col-md-12 form-group">
+                            <label for="">Tag</label>
+                            {!! Form::text('tags', null, ['id' => 'tags-input', 'class' => 'form-control', 'data-role' => 'tagsinput']) !!}
+                        </div>
+
+                        <div class="col-md-12 form-group">
                             <label for="excerpt">Excerpt</label>
                             {!! Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                         </div>
@@ -49,15 +54,6 @@
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <label for="">Tag</label>
-                            @foreach ($tags as $tag)
-                                <div class="checkbox">
-                                    <label>{!! Form::checkbox('tag[]', $tag->id) !!} {{ $tag->name }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div class="col-md-12 form-group">
                             <label for="">Feature Image</label>
                             {!! Form::file('image', ['id' => 'image', 'class' => 'form-control', 'accept' => 'image/png, image/jpeg, image/gif']) !!}
                             <img id="preview" src="" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
@@ -74,7 +70,9 @@
 @endsection
 
 @section('footer')
+    <link rel="stylesheet" href="{{ asset('admin/css/bootstrap-tagsinput.css') }}">
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap-tagsinput.js') }}"></script>
 
     <script type="text/javascript">
         CKEDITOR.replace('content');
@@ -111,12 +109,18 @@
             }
         }
 
-        $("input#image").change(function (){
+        $("form").on('keypress', function(e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+
+        $("input#image").on('change', function (){
             readURL(this);
             $('p#remove-image').css('display', 'block');
         });
 
-        $('p#remove-image').click(function (){
+        $('p#remove-image').on('click', function (){
             $('input#image').val('');
             $("img#preview").removeAttr('src');
             $(this).css('display', 'none');

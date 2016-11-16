@@ -19,6 +19,11 @@
                             {!! Form::text('slug', $post->slug, ['class' => 'form-control', 'id' => 'slug', 'required']) !!}
                         </div>
 
+                        <div class="col-md-12 form-group">
+                            <label for="">Tag</label>
+                            {!! Form::text('tags', $tags, ['id' => 'tags-input', 'class' => 'form-control', 'data-role' => 'tagsinput']) !!}
+                        </div>
+
                         <div class="col-sm-12 form-group">
                             <label for="excerpt">Excerpt</label>
                             {!! Form::textarea('excerpt', $post->excerpt, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
@@ -51,15 +56,6 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12 form-group">
-                            <label for="">Tag</label>
-                            @foreach ($tags as $tag)
-                                <div class="checkbox">
-                                    <label>{!! Form::checkbox('tag', $tag->id, $post->tags->contains($tag->id)) !!} {{ $tag->name }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-
                         <div class="col-sm-12 form-group">
                             <label for="">Feature Image</label>
                             {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
@@ -79,7 +75,9 @@
 @endsection
 
 @section('footer')
+    <link rel="stylesheet" href="{{ asset('admin/css/bootstrap-tagsinput.css') }}">
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap-tagsinput.js') }}"></script>
 
     <script type="text/javascript">
         CKEDITOR.replace( 'content' );

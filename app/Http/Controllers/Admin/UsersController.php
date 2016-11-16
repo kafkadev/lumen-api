@@ -100,7 +100,11 @@ class UsersController extends AdminController
     */
     public function destroy($id)
     {
-        User::destroy($id);
+        $user = User::findOrfail($id);
+        foreach ($user->posts as $post) {
+            $post->update('user_id', '');
+        }
+        $user->delete();
         $_SESSION['success'] = 'Delete User successfully!';
         return redirect('admin/users');
     }

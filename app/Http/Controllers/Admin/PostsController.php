@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Tag;
+use App\Models\PostTag;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -61,11 +62,25 @@ class PostsController extends AdminController
             'excerpt' => 'required',
             'image' => 'image',
         ]);
-        $data = $request->all();
+        $data = $request->except('tags');
         if ($request->hasFile('image')) {
             $data['image'] = $this->setUrlImage($request);
         }
-        Post::create($data);
+        $post = Post::create($data);
+        $tags = explode(',', $request->tags);
+        foreach ($tags as $tag) {
+            $checkTag = Tag::where('name', $tag)->first();
+            if (!$checkTag) {
+                $checkTag = Tag::create([
+                    'name' => $tag,
+                    'slug' => str_slug($tag, '-'),
+                ]);
+            }
+            PostTag::create([
+                'tag_id' => $checkTag->id,
+                'post_id' => $post->id,
+            ]);
+        }
         $_SESSION['success'] = 'Create Post successfully!';
         return redirect('admin/posts');
     }
@@ -78,9 +93,13 @@ class PostsController extends AdminController
      */
     public function edit($id)
     {
-        $this->viewData['tags'] = Tag::all();
         $this->viewData['users'] = User::orderBy('name')->pluck('name', 'id');
         $this->viewData['post'] = Post::findOrFail($id);
+        $data = [];
+        foreach ($this->viewData['post']->tags as $tag) {
+            $data[] = $tag->name;
+        }
+        $this->viewData['tags'] = implode(',', $data);
         $this->viewData['categories'] = Category::orderBy('name')->get();
         return view('admin.posts.edit', $this->viewData);
     }

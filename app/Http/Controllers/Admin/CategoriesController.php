@@ -11,7 +11,6 @@ class CategoriesController extends AdminController
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {

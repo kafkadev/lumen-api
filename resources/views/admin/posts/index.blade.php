@@ -31,7 +31,7 @@
                             </td>
                             <td>
                                 @foreach ($post->tags as $tag)
-                                    <li><a href="{{ url('admin/tag/' . $tag->id . '/posts') }}">{{ $tag->name }}</a></li>
+                                    <a href="{{ url('admin/tag/' . $tag->id . '/posts') }}">{{ $tag->name }}</a> 
                                 @endforeach
                             </td>
                             <td>{{ $post->getStatus() }}</td>

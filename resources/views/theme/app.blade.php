@@ -9,6 +9,8 @@
 
     <title>TiepPt's Blog</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('icon.ico') }}"/>
+
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('theme/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('theme/css/brick-by-brick.css') }}" rel="stylesheet">
