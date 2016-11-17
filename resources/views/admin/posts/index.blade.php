@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($posts as $post)
                         <tr class="gradeU">
-                            <td><a target="__blank" href="{{ url("$post->slug") }}">{{ $post->title }}</a></td>
+                            <td><a target="__blank" href="{{ $post->category_id == 1 ? url("it/$post->slug") : url("cakes/$post->slug") }}">{{ $post->title }}</a></td>
                             <td><a href="{{ url('admin/user/' . $post->user_id . '/posts') }}">{{ $post->user->name }}</a></td>
                             <td>
                                 @if (isset($post->category))

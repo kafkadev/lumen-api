@@ -23,11 +23,11 @@
             @foreach ($posts as $post)
                 <div>
                     <div class="post-preview">
-                        <a href="{{ url("$post->slug") }}">
+                        <a href="{{ $post->category_id == 1 ? url("it/$post->slug") : url("cakes/$post->slug") }}">
                             <h2 class="post-title text-center">
                                 {{ $post->title }}
                             </h2>
-                            <img src="{{ $post->image }}" alt="" width='100%'>
+                            <img src="{{ $post->image or asset('theme/img/home-bg.jpg') }}" alt="" width='100%'>
                             {{-- <h3 class="post-subtitle">
                                 Problems look mighty small from 150 miles up
                             </h3> --}}

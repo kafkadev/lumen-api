@@ -67,6 +67,11 @@ $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], 
     $app->get('post/{post}/edit', 'PostsController@edit');
     $app->patch('post/{post}', 'PostsController@update');
     $app->delete('post/{post}', 'PostsController@destroy');
+
+    $app->get('comments', 'CommentsController@index');
+    $app->get('comment/{post}', 'CommentsController@show');
+    $app->patch('comment/{post}', 'CommentsController@update');
+    $app->delete('comment/{post}', 'CommentsController@destroy');
 });
 
 $app->group(['namespace' => 'App\Http\Controllers\Theme'], function () use ($app) {
@@ -75,9 +80,8 @@ $app->group(['namespace' => 'App\Http\Controllers\Theme'], function () use ($app
     $app->get('contact', 'HomeController@getContact');
     $app->post('contact', 'HomeController@postContact');
     $app->get('profile', 'ProfileController@index');
-    $app->get('blog', 'PostsController@index');
+    $app->get('it', 'PostsController@index');
     $app->get('cakes', 'CakesController@index');
-    $app->get('cakes', 'CakesController@index');
-    $app->get('cake/{post}', 'CakesController@show');
-    $app->get('{post}', 'PostsController@show');
+    $app->get('cakes/{post}', 'CakesController@show');
+    $app->get('it/{post}', 'PostsController@show');
 });

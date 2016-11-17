@@ -55,7 +55,7 @@
 
                         <div class="col-md-12 form-group">
                             <label for="">Feature Image</label>
-                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control', 'accept' => 'image/png, image/jpeg, image/gif']) !!}
+                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control', 'accept' => 'image/png, image/jpeg']) !!}
                             <img id="preview" src="" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
                             <p id="remove-image" style="display: none"><a style="cursor: pointer">Remove image</a></p>
                         </div>

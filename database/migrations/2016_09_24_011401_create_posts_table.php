@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('excerpt')->nullable();
             $table->text('content')->nullable();
             $table->integer('views')->default(1);
-            $table->tinyInteger('status')->index()->default(1);
+            $table->tinyInteger('status')->index()->default(0);
             $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();

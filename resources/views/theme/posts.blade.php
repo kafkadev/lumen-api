@@ -23,7 +23,7 @@
             @foreach ($posts as $post)
                 <div>
                     <div class="post-preview">
-                        <a href="{{ url("$post->slug") }}">
+                        <a href="{{ url("it/$post->slug") }}">
                             <h2 class="post-title text-center">
                                 {{ $post->title }}
                             </h2>

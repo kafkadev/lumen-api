@@ -6,6 +6,6 @@ class PostTagTableSeeder extends Seeder {
 
     public function run()
     {
-        factory(App\Models\PostTag::class, 100)->create()->make();
+        // factory(App\Models\PostTag::class, 100)->create()->make();
     }
 }

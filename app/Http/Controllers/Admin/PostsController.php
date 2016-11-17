@@ -97,7 +97,7 @@ class PostsController extends AdminController
         $this->viewData['post'] = Post::findOrFail($id);
         $data = [];
         foreach ($this->viewData['post']->tags as $tag) {
-            $data[] = $tag->name;
+            $data[] = ucfirst( $tag->name );
         }
         $this->viewData['tags'] = implode(',', $data);
         $this->viewData['categories'] = Category::orderBy('name')->get();
@@ -119,7 +119,7 @@ class PostsController extends AdminController
             'excerpt' => 'required',
             'image' => 'image',
         ]);
-        $data = $request->all();
+        $data = $request->except('tags');
         if ($request->hasFile('image')) {
             $data['image'] = $this->setUrlImage($request);
         }
@@ -128,6 +128,42 @@ class PostsController extends AdminController
         }
         $post = Post::findOrfail($id);
         $post->update($data);
+        $newTags = explode(',', $request->tags);
+        $oldTags = $post->tags->pluck('name');
+
+        $removeTags = array_diff($oldTags->toArray(), $newTags);
+        $tags = array_diff($newTags, $oldTags->toArray());
+
+        foreach ($removeTags as $removeTag) {
+            $tag = Tag::where('name', $removeTag)->first();
+            if (!$tag) {
+                continue;
+            }
+            $posttag = PostTag::where('post_id', $post->id)->where('tag_id', $tag->id)->first();
+            if (!$posttag) {
+                continue;
+            }
+            $posttag->delete();
+        }
+
+        foreach ($tags as $tag) {
+            $checkTag = Tag::where('name', $tag)->first();
+            if (!$checkTag) {
+                $checkTag = Tag::create([
+                    'name' => $tag,
+                    'slug' => str_slug($tag, '-'),
+                ]);
+            }
+            $posttag = PostTag::where('post_id', $post->id)->where('tag_id', $checkTag->id)->first();
+            if ($posttag) {
+                continue;
+            }
+            PostTag::create([
+                'tag_id' => $checkTag->id,
+                'post_id' => $post->id,
+            ]);
+        }
+
         $_SESSION['success'] = 'Update Post successfully!';
         return redirect('admin/posts');
     }

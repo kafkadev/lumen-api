@@ -12,13 +12,24 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $hasher = app()->make('hash');
-        factory(App\Models\User::class)->create([
-            'name' => 'Tiep Pt',
-            'username' => 'admin',
-            'email' => 'admin@tieppt.com',
-            'password' => $hasher->make('admin'),
-            'role' => 1,
-        ]);
+        factory(App\Models\User::class)->create(
+            [
+                'name' => 'Tiep Pt',
+                'username' => 'tiep1293',
+                'email' => 'tieppt07@gmail.com',
+                'password' => $hasher->make('nokiae63'),
+                'role' => 1,
+            ]
+        );
+        factory(App\Models\User::class)->create(
+            [
+                'name' => 'Thao NP',
+                'username' => 'thaonp',
+                'email' => 'thaonptlu@gmail.com',
+                'password' => $hasher->make('iphone5slock'),
+                'role' => 1,
+            ]
+        );
         // factory(App\Models\User::class, 50)->create()->make();
     }
 }

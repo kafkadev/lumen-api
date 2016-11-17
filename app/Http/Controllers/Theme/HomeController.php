@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class HomeController extends ThemeController
@@ -38,6 +39,11 @@ class HomeController extends ThemeController
 
     public function postContact(Request $request)
     {
-        dd($request->all());
+        $request->merge(array_map('trim', $request->all()));
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['phone'] = $request->phone;
+        $data['msg'] = $request->message;
+        Comment::create($data);
     }
 }

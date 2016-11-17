@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     @foreach ($post->tags as $tag)
-                        <a href="{{ url("tag/$tag->slug/posts") }}" class="btn btn-default">{{ $tag->name }}</a>
+                        <a style="margin-bottom: 5px;" href="{{ url("tag/$tag->slug/posts") }}" class="btn btn-default">{{ $tag->name }}</a>
                     @endforeach
                 </div>
             </div>

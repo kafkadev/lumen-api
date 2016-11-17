@@ -58,7 +58,7 @@
 
                         <div class="col-sm-12 form-group">
                             <label for="">Feature Image</label>
-                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control']) !!}
+                            {!! Form::file('image', ['id' => 'image', 'class' => 'form-control', 'accept' => 'image/png, image/jpeg']) !!}
                             {!! Form::hidden('remove_image', null, ['id' => 'remove-image']) !!}
                             <img id="preview" src="{{ $post->image }}" style="max-width: 100%; max-height: 100%; margin-top: 5px;">
                             <p id="remove-image" style="display: @if ($post->image != null) block @else none @endif"><a style="cursor: pointer">Remove image</a></p>
@@ -113,6 +113,12 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        $("form").on('keypress', function(e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
 
         $("input#image").change(function (){
             readURL(this);
