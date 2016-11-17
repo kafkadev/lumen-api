@@ -11,7 +11,7 @@
 |
 */
 
-$app->group(['prefix' => 'api', 'namespace' => 'App\Http\Controllers\Api'], function () use ($app) {
+$app->group(['prefix' => 'api', 'namespace' => 'Api'], function () use ($app) {
     $app->post('login', 'AuthController@login');
     $app->post('register', 'AuthController@register');
 
@@ -22,7 +22,7 @@ $app->group(['prefix' => 'api', 'namespace' => 'App\Http\Controllers\Api'], func
     $app->delete('user/{user}', 'UsersController@destroy');
 });
 
-$app->group(['namespace' => 'App\Http\Controllers\Auth'], function () use ($app) {
+$app->group(['namespace' => 'Auth'], function () use ($app) {
     $app->get('login', 'AuthController@showLogin');
     $app->post('login', 'AuthController@postLogin');
     $app->get('register', 'AuthController@showRegister');
@@ -30,7 +30,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Auth'], function () use ($app)
     $app->get('logout', 'AuthController@logout');
 });
 
-$app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function () use ($app) {
+$app->group(['prefix' => 'admin', 'namespace' => 'Admin'], function () use ($app) {
     $app->get('dashboard', 'HomeController@index');
     $app->get('profile', 'ProfileController@index');
     $app->patch('profile/info', 'ProfileController@info');
@@ -74,7 +74,7 @@ $app->group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], 
     $app->delete('comment/{post}', 'CommentsController@destroy');
 });
 
-$app->group(['namespace' => 'App\Http\Controllers\Theme'], function () use ($app) {
+$app->group(['namespace' => 'Theme'], function () use ($app) {
     $app->get('/', 'HomeController@index');
     $app->get('about', 'HomeController@about');
     $app->get('contact', 'HomeController@getContact');
