@@ -33,4 +33,28 @@ class PostsController extends ThemeController
         $this->viewData['post']->update(['views' => $countViews + 1]);
         return view('theme.post', $this->viewData);
     }
+
+    public function it()
+    {
+        $this->viewData['banner'] = asset('theme/img/home-bg.jpg');
+        $this->viewData['posts'] = Post::status()->techs()->with('user')->orderBy('created_at', 'desc')->paginate(12);
+        return view('theme.posts', $this->viewData);
+    }
+
+    public function cake()
+    {
+        $this->viewData['banner'] = asset('theme/img/post-cake.jpg');
+        $this->viewData['posts'] = Post::status()->cakes()->with('user')->orderBy('created_at', 'desc')->paginate(12);
+        return view('theme.posts', $this->viewData);
+    }
+
+    public function author($username)
+    {
+        $this->viewData['user'] = User::where('username', $username)->first();
+        if (!$this->viewData['user']) {
+            return redirect('/');
+        }
+        $this->viewData['posts'] = $this->viewData['user']->posts->status()->with('user')->orderBy('created_at', 'desc')->paginate(12);
+        return view('theme.posts', $this->viewData);
+    }
 }

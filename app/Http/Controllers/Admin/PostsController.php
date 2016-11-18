@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\PostTag;
 use Illuminate\Http\Request;
 use Auth;
+use File;
 
 class PostsController extends AdminController
 {

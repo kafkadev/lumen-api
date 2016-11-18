@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('it') }}">IT</a></li>
-                <li><a href="{{ url('cakes') }}">Cakes</a></li>
+                <li><a href="{{ url('cake') }}">Cake</a></li>
                 <li><a href="{{ url('about') }}">About</a></li>
                 <li><a href="{{ url('contact') }}">Contact</a></li>
             </ul>

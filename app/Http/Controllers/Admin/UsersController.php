@@ -102,7 +102,7 @@ class UsersController extends AdminController
     {
         $user = User::findOrfail($id);
         foreach ($user->posts as $post) {
-            $post->update('user_id', '');
+            $post->delete();
         }
         $user->delete();
         $_SESSION['success'] = 'Delete User successfully!';

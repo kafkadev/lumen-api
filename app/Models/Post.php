@@ -35,6 +35,17 @@ class Post extends Model
         return 'Draft';
     }
 
+    public function getImageAttribute($value)
+    {
+        if ($value != '') {
+            return $value;
+        }
+        if ($this->category_id == 1) {
+            return asset('theme/img/home-bg.jpg');
+        }
+        return asset('theme/img/post-cake.jpg');
+    }
+
     public function scopeStatus($query)
     {
         return $query->where('status', 1);

@@ -80,8 +80,9 @@ $app->group(['namespace' => 'Theme'], function () use ($app) {
     $app->get('contact', 'HomeController@getContact');
     $app->post('contact', 'HomeController@postContact');
     $app->get('profile', 'ProfileController@index');
-    $app->get('it', 'PostsController@index');
-    $app->get('cakes', 'CakesController@index');
-    $app->get('cakes/{post}', 'CakesController@show');
-    $app->get('it/{post}', 'PostsController@show');
+    $app->get('tag/{tag}/posts', 'TagsController@show');
+    $app->get('it', 'PostsController@it');
+    $app->get('cake', 'PostsController@cake');
+    $app->get('author/{user}/posts', 'PostsController@author');
+    $app->get('{post}', 'PostsController@show');
 });

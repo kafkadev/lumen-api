@@ -99,7 +99,11 @@ class CategoriesController extends AdminController
      */
     public function destroy($id)
     {
-        Category::destroy($id);
+        $category = Category::findOrfail($id);
+        foreach ($category->posts as $post) {
+            $post->delete();
+        }
+        $category->delete();
         $_SESSION['success'] = 'Delete Category successfully!';
         return redirect('admin/categories');
     }

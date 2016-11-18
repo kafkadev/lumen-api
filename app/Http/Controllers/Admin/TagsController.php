@@ -97,7 +97,11 @@ class TagsController extends AdminController
      */
     public function destroy($id)
     {
-        Tag::destroy($id);
+        $tag = Tag::findOrfail($id);
+        foreach ($tag->posttags as $posttag) {
+            $posttag->delete();
+        }
+        $tag->delete();
         $_SESSION['success'] = 'Delete Tag successfully!';
         return redirect('admin/tags');
     }

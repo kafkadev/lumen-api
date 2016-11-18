@@ -23,7 +23,7 @@
             @foreach ($posts as $post)
                 <div>
                     <div class="post-preview">
-                        <a href="{{ $post->category_id == 1 ? url("it/$post->slug") : url("cakes/$post->slug") }}">
+                        <a href="{{ url("$post->slug") }}">
                             <h2 class="post-title text-center">
                                 {{ $post->title }}
                             </h2>
@@ -32,7 +32,7 @@
                                 Problems look mighty small from 150 miles up
                             </h3> --}}
                         </a>
-                        <p class="post-meta">Posted by <a href="#">{{ $post->user->name }}</a> on {{ $post->created_at }}</p>
+                        <p class="post-meta">Posted by <a href="{{ url("author/$post->user->username/posts") }}">{{ $post->user->name }}</a> on {{ $post->created_at }}</p>
                     </div>
                     <hr>
                 </div>
