@@ -70,6 +70,9 @@ class PostsController extends AdminController
         $post = Post::create($data);
         $tags = explode(',', $request->tags);
         foreach ($tags as $tag) {
+            if ($tag = '') {
+                continue;
+            }
             $checkTag = Tag::where('name', $tag)->first();
             if (!$checkTag) {
                 $checkTag = Tag::create([
@@ -148,6 +151,9 @@ class PostsController extends AdminController
         }
 
         foreach ($tags as $tag) {
+            if ($tag == '') {
+                continue;
+            }
             $checkTag = Tag::where('name', $tag)->first();
             if (!$checkTag) {
                 $checkTag = Tag::create([

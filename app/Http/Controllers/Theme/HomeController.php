@@ -29,12 +29,16 @@ class HomeController extends ThemeController
 
     public function about()
     {
+        $this->viewData['post'] = Post::where('slug', 'about')->first();
+        if (!$this->viewData['post']) {
+            return redirect('/');
+        }
         return view('theme.about', $this->viewData);
     }
 
     public function getContact()
     {
-        return view('theme.contact', $this->viewData);
+        return view('theme.contact');
     }
 
     public function postContact(Request $request)
