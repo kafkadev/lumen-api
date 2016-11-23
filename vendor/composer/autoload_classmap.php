@@ -9,6 +9,7 @@ return array(
     'CategoriesTableSeeder' => $baseDir . '/database/seeds/CategoriesTableSeeder.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_09_24_011426_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2016_11_17_095911_create_comments_table.php',
+    'CreateMenusTable' => $baseDir . '/database/migrations/2016_11_20_094207_create_menus_table.php',
     'CreatePostTagTable' => $baseDir . '/database/migrations/2016_09_25_145253_create_post_tag_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2016_09_24_011401_create_posts_table.php',
     'CreateTagsTable' => $baseDir . '/database/migrations/2016_09_25_145212_create_tags_table.php',

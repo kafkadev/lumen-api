@@ -41,10 +41,10 @@ class PostsController extends ThemeController
         return view('theme.posts', $this->viewData);
     }
 
-    public function cake()
+    public function food()
     {
         $this->viewData['banner'] = asset('theme/img/post-cake.jpg');
-        $this->viewData['posts'] = Post::status()->cakes()->with('user')->orderBy('created_at', 'desc')->paginate(12);
+        $this->viewData['posts'] = Post::status()->foods()->with('user')->orderBy('created_at', 'desc')->paginate(12);
         return view('theme.posts', $this->viewData);
     }
 

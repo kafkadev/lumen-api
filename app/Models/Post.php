@@ -11,7 +11,7 @@ class Post extends Model
 
     const IS_PUBLISH = 1;
     const IS_DRAFT = 0;
-    const IS_CAKES = 2;
+    const IS_FOODS = 2;
     const IS_TECHS = 1;
 
     /**
@@ -56,9 +56,9 @@ class Post extends Model
         return $query->where('category_id', self::IS_TECHS);
     }
 
-    public function scopeCakes($query)
+    public function scopeFoods($query)
     {
-        return $query->where('category_id', self::IS_CAKES);
+        return $query->where('category_id', self::IS_FOODS);
     }
 
     public function category()

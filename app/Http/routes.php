@@ -72,6 +72,10 @@ $app->group(['prefix' => 'admin', 'namespace' => 'Admin'], function () use ($app
     $app->get('comment/{post}', 'CommentsController@show');
     $app->patch('comment/{post}', 'CommentsController@update');
     $app->delete('comment/{post}', 'CommentsController@destroy');
+
+    $app->get('menu', 'MenusController@index');
+    $app->patch('menu/{menu}', 'MenusController@update');
+    $app->post('menu', 'MenusController@store');
 });
 
 $app->group(['namespace' => 'Theme'], function () use ($app) {
@@ -82,7 +86,7 @@ $app->group(['namespace' => 'Theme'], function () use ($app) {
     $app->get('profile', 'ProfileController@index');
     $app->get('tag/{tag}/posts', 'TagsController@show');
     $app->get('it', 'PostsController@it');
-    $app->get('cake', 'PostsController@cake');
+    $app->get('food', 'PostsController@food');
     $app->get('author/{user}/posts', 'PostsController@author');
     $app->get('{post}', 'PostsController@show');
 });

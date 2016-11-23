@@ -338,6 +338,7 @@ class ComposerStaticInitf02f37bd05854785cff821dc5485d8d9
         'CategoriesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoriesTableSeeder.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_24_011426_create_categories_table.php',
         'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_17_095911_create_comments_table.php',
+        'CreateMenusTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_20_094207_create_menus_table.php',
         'CreatePostTagTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_25_145253_create_post_tag_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_24_011401_create_posts_table.php',
         'CreateTagsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_25_145212_create_tags_table.php',

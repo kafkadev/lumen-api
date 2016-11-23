@@ -16,6 +16,10 @@
                 <a href="{{ url('admin/dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
+            {{--     <a class="{{ setActive(['admin/menu']) }}" href="{{ url('admin/menu') }}"><i class="fa fa-sitemap fa-fw"></i> Menu</a>
+                <!-- /.nav-second-level -->
+            </li> --}}
+            <li>
                 <a class="{{ setActive(['admin/user']) }}" href="{{ url('admin/users') }}"><i class="fa fa-users fa-fw"></i> Users</a>
                 <!-- /.nav-second-level -->
             </li>
